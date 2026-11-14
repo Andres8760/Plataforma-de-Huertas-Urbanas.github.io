@@ -18,7 +18,7 @@ Los datos (usuarios, sesión y huertas) se guardan en `localStorage` del navegad
 ## Integrantes
 
 - Darlyn Dayana Grisales Orozco
-- David Alejandro Clavijo Guevara
+- David Alejandro Clavijo Guevara 1105368090
 - Andres Felipe Gelpud Calvache
 
 ## Estado del proyecto

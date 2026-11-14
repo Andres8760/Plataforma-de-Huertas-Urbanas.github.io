@@ -700,3 +700,52 @@ input[aria-invalid="true"] {
     font-size: 0.68rem;
   }
 }
+
+/* ===================== ACCESIBILIDAD: PERCEPTIBLE ===================== */
+
+/* 1.4.11 Contraste de componentes: los bordes de los campos deben verse (mín. 3:1) */
+:root {
+  --borde-campo: #6F7A66;
+}
+
+input {
+  border: 1px solid var(--borde-campo);
+}
+
+/* 1.4.1 Los enlaces dentro de texto no dependen solo del color */
+p a,
+.panel a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 1.1.1 La imagen mantiene proporción y no rompe el diseño si no carga */
+.hero-imagen img {
+  max-width: 100%;
+  background-color: var(--verde-suave);
+}
+
+/* 1.4.4 / 1.4.12 El texto puede ampliarse y espaciarse sin que se corte */
+.tarjeta,
+.tarjeta-caso,
+.evento,
+.hilo {
+  overflow-wrap: anywhere;
+}
+
+.evento-info,
+.tarjeta-caso {
+  min-width: 0;
+}
+
+/* Alto contraste del sistema (Windows): conservar bordes visibles */
+@media (forced-colors: active) {
+  .btn,
+  input,
+  .tarjeta,
+  .tarjeta-caso,
+  .evento,
+  .hilo {
+    border: 1px solid CanvasText;
+  }
+}

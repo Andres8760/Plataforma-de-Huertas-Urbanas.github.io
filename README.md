@@ -27,7 +27,19 @@ Navegación entre páginas completada. Aún en desarrollo.
 
 ## Accesibilidad (WCAG 2.2)
 
-Se trabajaron dos principios: **Operable** y **Comprensible**.
+Se trabajaron tres principios: **Perceptible**, **Operable** y **Comprensible**.
+
+**Perceptible**
+- 1.1.1 La imagen informativa tiene texto alternativo descriptivo y los emojis decorativos se ocultan a los lectores de pantalla (`aria-hidden`).
+- 1.3.1 Estructura semántica (`header`, `nav`, `main`, `footer`), un `h1` por página y jerarquía de encabezados sin saltos; las fechas del calendario se leen completas ("4 de octubre").
+- 1.3.4 / 1.4.10 Sin bloqueo de orientación y reflow sin scroll horizontal a 320 px.
+- 1.4.1 Los enlaces dentro de texto van subrayados (no dependen solo del color).
+- 1.4.3 Contraste de texto de al menos 4.5:1.
+- 1.4.4 / 1.4.12 Texto ampliable al 200% y espaciado de texto modificable sin cortes ni pérdida de contenido.
+- 1.4.5 Sin imágenes de texto.
+- 1.4.11 Contraste de componentes: bordes de los campos con 4.5:1 (antes 1.3:1).
+- Soporte para modo de alto contraste del sistema (`forced-colors`).
+- 1.2 (medios con tiempo) no aplica: el sitio no tiene audio ni video.
 
 **Operable**
 - 2.1.1 / 2.1.2 Todo funciona con teclado; los diálogos atrapan el foco mientras están abiertos y se cierran con `Esc` (sin trampas).

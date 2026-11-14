@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoHuertos · Huertas Urbanas Colaborativas</title>
+    <title>Inicio · EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body data-pagina="inicio">
 
     <header class="topbar">
-        <div class="marca">
+        <a href="index.html" class="marca">
             <span class="marca-icono">🌿</span>
             <span class="marca-texto">EcoHuertos</span>
-        </div>
+        </a>
 
         <div class="auth-invitado" id="auth-invitado">
             <button class="btn btn-fantasma" id="btn-abrir-login">Iniciar sesión</button>
@@ -31,8 +31,7 @@
     </header>
 
     <main>
-
-        <section id="vista-inicio" class="vista vista-activa">
+        <section class="vista vista-activa">
 
             <div class="hero">
                 <div class="hero-texto">
@@ -47,7 +46,7 @@
                         foro y una biblioteca de guías.
                     </p>
                     <div class="hero-acciones">
-                        <button class="btn btn-relleno btn-grande" id="btn-hero-registro">Registra tu huerta</button>
+                        <a href="huertas.html" class="btn btn-relleno btn-grande">Registra tu huerta</a>
                         <a href="#seccion-problema" class="btn btn-texto">¿Qué problema resuelve?</a>
                     </div>
                 </div>
@@ -92,182 +91,27 @@
             </section>
 
         </section>
-
-        <section id="vista-calendario" class="vista">
-            <h2>Calendario público</h2>
-            <p class="subtitulo">Siembras, cosechas y jornadas comunitarias abiertas a todo el mundo.</p>
-
-            <div class="lista-eventos">
-                <article class="evento">
-                    <div class="evento-fecha">
-                        <span class="evento-dia">04</span>
-                        <span class="evento-mes">Oct</span>
-                    </div>
-                    <div class="evento-info">
-                        <h3>Siembra de hortalizas de clima frío</h3>
-                        <p>Huerta El Retoño · Jornada abierta a nuevos voluntarios.</p>
-                    </div>
-                </article>
-                <article class="evento">
-                    <div class="evento-fecha">
-                        <span class="evento-dia">18</span>
-                        <span class="evento-mes">Oct</span>
-                    </div>
-                    <div class="evento-info">
-                        <h3>Cosecha comunitaria de tomates</h3>
-                        <p>Huerta Semillas del Barrio · Trae tu propio recipiente.</p>
-                    </div>
-                </article>
-                <article class="evento">
-                    <div class="evento-fecha">
-                        <span class="evento-dia">02</span>
-                        <span class="evento-mes">Nov</span>
-                    </div>
-                    <div class="evento-info">
-                        <h3>Taller de compostaje casero</h3>
-                        <p>Huerta El Retoño · Abierto al público, cupos limitados.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="vista-huertas" class="vista">
-            <h2>Huertas públicas</h2>
-            <p class="subtitulo">Explora las huertas registradas por la comunidad o añade la tuya.</p>
-
-            <form id="form-huerta">
-                <div class="campo">
-                    <label for="nombre">Nombre de la huerta</label>
-                    <input type="text" id="nombre" required>
-                </div>
-                <div class="campo">
-                    <label for="ubicacion">Ubicación</label>
-                    <input type="text" id="ubicacion" required>
-                </div>
-                <div class="campo">
-                    <label for="cultivo">Cultivo principal</label>
-                    <input type="text" id="cultivo" required>
-                </div>
-                <button type="submit" class="btn btn-relleno">Registrar huerta</button>
-            </form>
-
-            <div id="contenedor-huertas" class="lista-huertas"></div>
-        </section>
-
-        <section id="vista-foro" class="vista">
-            <h2>Foro público</h2>
-            <p class="subtitulo">Preguntas y aprendizajes compartidos por toda la comunidad.</p>
-
-            <div class="lista-hilos">
-                <article class="hilo">
-                    <h3>¿Cómo controlar el pulgón sin químicos?</h3>
-                    <p>12 respuestas · Última actividad hace 2 días</p>
-                </article>
-                <article class="hilo">
-                    <h3>Guía rápida: rotación de cultivos en camas pequeñas</h3>
-                    <p>7 respuestas · Última actividad hace 5 días</p>
-                </article>
-                <article class="hilo">
-                    <h3>Buscamos voluntarios para huerta escolar</h3>
-                    <p>3 respuestas · Última actividad hace 1 semana</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="vista-nosotros" class="vista">
-            <h2>Nosotros</h2>
-            <p class="subtitulo">Quiénes construimos EcoHuertos y por qué lo hicimos.</p>
-
-            <section class="franja franja-sin-borde">
-                <h3>Nuestra motivación</h3>
-                <p>
-                    EcoHuerto nacio como un proyecto desarrollado para la materia de 
-                    Programacion Orientada a la Web Su propósito es aplicar de manera práctica los 
-                    conceptos aprendidos en clase mediante la creación de una plataforma enfocada en la 
-                    gestión de huertos ecológicos, combinando conocimientos de programación, organización 
-                    de datos y diseño de soluciones tecnológicas.
-                </p>
-            </section>
-
-            <section class="franja">
-                <h3>El equipo</h3>
-                <div class="tarjetas-publico">
-                    <article class="tarjeta tarjeta-autor">
-                        <span class="autor-avatar">AG</span>
-                        <h3>Andres Felipe Gelpud Calvache</h3>
-                        <p class="autor-rol">Programador</p>
-                    </article>
-                    <article class="tarjeta tarjeta-autor">
-                        <span class="autor-avatar">DG</span>
-                        <h3>Darlyn Dayana Grisales Orozco</h3>
-                        <p class="autor-rol">Programador</p>
-                    </article>
-                    <article class="tarjeta tarjeta-autor">
-                        <span class="autor-avatar">DC</span>
-                        <h3>David Alejandro Clavijo Guevara </h3>
-                        <p class="autor-rol">Programador</p>
-                    </article>
-                </div>
-            </section>
-        </section>
-        
-        <section id="vista-proyecto" class="vista">
-            <h2>Mi proyecto</h2>
-            <p class="subtitulo">Tu espacio personal dentro de EcoHuertos.</p>
-
-            <nav class="subtabs">
-                <button class="subtab subtab-activa" data-panel="panel-info">Información</button>
-                <button class="subtab" data-panel="panel-mi-huerta">Mi huerta</button>
-                <button class="subtab" data-panel="panel-mi-foro">Mi foro</button>
-                <button class="subtab" data-panel="panel-mi-calendario">Mi calendario</button>
-            </nav>
-
-            <div id="panel-info" class="panel panel-activo">
-                <h3>Información de tu cuenta</h3>
-                <p>Nombre completo: <strong id="info-nombre-completo">—</strong></p>
-                <p>Usuario: <strong id="info-usuario">—</strong></p>
-                <p>Correo: <strong id="info-correo">—</strong></p>
-                <p>Desde aquí podrás administrar tus datos y preferencias de la comunidad.</p>
-            </div>
-
-            <div id="panel-mi-huerta" class="panel">
-                <h3>Mi huerta</h3>
-                <p class="subtitulo">Huertas que has registrado con tu cuenta.</p>
-                <div id="contenedor-mis-huertas" class="lista-huertas"></div>
-            </div>
-
-            <div id="panel-mi-foro" class="panel">
-                <h3>Mi foro</h3>
-                <p>Aún no has publicado ni respondido ningún hilo. Cuando lo hagas, aparecerá aquí.</p>
-            </div>
-
-            <div id="panel-mi-calendario" class="panel">
-                <h3>Mi calendario</h3>
-                <p>Aún no te has apuntado a ninguna actividad. Explora el calendario público para unirte a una.</p>
-            </div>
-        </section>
-
     </main>
 
     <nav class="tabbar">
-        <button class="tab tab-activa" data-vista="inicio">
+        <a class="tab tab-activa" href="index.html" aria-current="page">
             <span class="tab-icono">🏠</span><span>Inicio</span>
-        </button>
-        <button class="tab" data-vista="calendario">
+        </a>
+        <a class="tab" href="calendario.html">
             <span class="tab-icono">📅</span><span>Calendario</span>
-        </button>
-        <button class="tab" data-vista="huertas">
+        </a>
+        <a class="tab" href="huertas.html">
             <span class="tab-icono">🌱</span><span>Huertas</span>
-        </button>
-        <button class="tab" data-vista="foro">
+        </a>
+        <a class="tab" href="foro.html">
             <span class="tab-icono">💬</span><span>Foro</span>
-        </button>
-        <button class="tab" data-vista="nosotros">
+        </a>
+        <a class="tab" href="nosotros.html">
             <span class="tab-icono">🌻</span><span>Nosotros</span>
-        </button>
-        <button class="tab oculto" data-vista="proyecto" id="tab-proyecto">
+        </a>
+        <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono">📁</span><span>Mi Proyecto</span>
-        </button>
+        </a>
     </nav>
 
     <div class="modal-fondo oculto" id="modal-login">

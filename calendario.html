@@ -13,9 +13,11 @@
 
 <body data-pagina="calendario">
 
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
     <header class="topbar">
         <a href="index.html" class="marca">
-            <span class="marca-icono">🌿</span>
+            <span class="marca-icono" aria-hidden="true">🌿</span>
             <span class="marca-texto">EcoHuertos</span>
         </a>
 
@@ -30,9 +32,9 @@
         </div>
     </header>
 
-    <main>
+    <main id="contenido-principal" tabindex="-1">
         <section class="vista vista-activa">
-            <h2>Calendario público</h2>
+            <h1 class="t-pagina">Calendario público</h1>
             <p class="subtitulo">Siembras, cosechas y jornadas comunitarias abiertas a todo el mundo.</p>
 
             <div class="lista-eventos">
@@ -42,7 +44,7 @@
                         <span class="evento-mes">Oct</span>
                     </div>
                     <div class="evento-info">
-                        <h3>Siembra de hortalizas de clima frío</h3>
+                        <h2 class="t-sub">Siembra de hortalizas de clima frío</h2>
                         <p>Huerta El Retoño · Jornada abierta a nuevos voluntarios.</p>
                     </div>
                 </article>
@@ -52,7 +54,7 @@
                         <span class="evento-mes">Oct</span>
                     </div>
                     <div class="evento-info">
-                        <h3>Cosecha comunitaria de tomates</h3>
+                        <h2 class="t-sub">Cosecha comunitaria de tomates</h2>
                         <p>Huerta Semillas del Barrio · Trae tu propio recipiente.</p>
                     </div>
                 </article>
@@ -62,7 +64,7 @@
                         <span class="evento-mes">Nov</span>
                     </div>
                     <div class="evento-info">
-                        <h3>Taller de compostaje casero</h3>
+                        <h2 class="t-sub">Taller de compostaje casero</h2>
                         <p>Huerta El Retoño · Abierto al público, cupos limitados.</p>
                     </div>
                 </article>
@@ -70,76 +72,79 @@
         </section>
     </main>
 
-    <nav class="tabbar">
+    <nav class="tabbar" aria-label="Navegación principal">
         <a class="tab" href="index.html">
-            <span class="tab-icono">🏠</span><span>Inicio</span>
+            <span class="tab-icono" aria-hidden="true">🏠</span><span>Inicio</span>
         </a>
         <a class="tab tab-activa" href="calendario.html" aria-current="page">
-            <span class="tab-icono">📅</span><span>Calendario</span>
+            <span class="tab-icono" aria-hidden="true">📅</span><span>Calendario</span>
         </a>
         <a class="tab" href="huertas.html">
-            <span class="tab-icono">🌱</span><span>Huertas</span>
+            <span class="tab-icono" aria-hidden="true">🌱</span><span>Huertas</span>
         </a>
         <a class="tab" href="foro.html">
-            <span class="tab-icono">💬</span><span>Foro</span>
+            <span class="tab-icono" aria-hidden="true">💬</span><span>Foro</span>
         </a>
         <a class="tab" href="nosotros.html">
-            <span class="tab-icono">🌻</span><span>Nosotros</span>
+            <span class="tab-icono" aria-hidden="true">🌻</span><span>Nosotros</span>
         </a>
         <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
-            <span class="tab-icono">📁</span><span>Mi Proyecto</span>
+            <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
     </nav>
 
     <div class="modal-fondo oculto" id="modal-login">
-        <div class="modal">
-            <button class="modal-cerrar" data-cerrar="modal-login">✕</button>
-            <h2>Iniciar sesión</h2>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
+            <button class="modal-cerrar" data-cerrar="modal-login" aria-label="Cerrar ventana de inicio de sesión">✕</button>
+            <h2 id="titulo-login">Iniciar sesión</h2>
             <form id="form-login">
                 <div class="campo">
-                    <label for="login-identificador">Usuario o correo</label>
-                    <input type="text" id="login-identificador" required>
+                    <label for="login-identificador">Usuario o correo <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="login-identificador" required autocomplete="username">
                 </div>
                 <div class="campo">
-                    <label for="login-clave">Contraseña</label>
-                    <input type="password" id="login-clave" required>
+                    <label for="login-clave">Contraseña <span class="req">(obligatorio)</span></label>
+                    <input type="password" id="login-clave" required autocomplete="current-password">
                 </div>
-                <p class="form-error oculto" id="error-login"></p>
+                <p class="form-error oculto" id="error-login" role="alert"></p>
                 <button type="submit" class="btn btn-relleno">Entrar</button>
             </form>
         </div>
     </div>
 
     <div class="modal-fondo oculto" id="modal-registro">
-        <div class="modal">
-            <button class="modal-cerrar" data-cerrar="modal-registro">✕</button>
-            <h2>Crear cuenta</h2>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-registro">
+            <button class="modal-cerrar" data-cerrar="modal-registro" aria-label="Cerrar ventana de registro">✕</button>
+            <h2 id="titulo-registro">Crear cuenta</h2>
             <form id="form-registro">
                 <div class="campo">
-                    <label for="registro-nombres">Nombres</label>
-                    <input type="text" id="registro-nombres" required>
+                    <label for="registro-nombres">Nombres <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="registro-nombres" required autocomplete="given-name">
                 </div>
                 <div class="campo">
-                    <label for="registro-apellidos">Apellidos</label>
-                    <input type="text" id="registro-apellidos" required>
+                    <label for="registro-apellidos">Apellidos <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="registro-apellidos" required autocomplete="family-name">
                 </div>
                 <div class="campo">
-                    <label for="registro-usuario">Nombre de usuario</label>
-                    <input type="text" id="registro-usuario" required>
+                    <label for="registro-usuario">Nombre de usuario <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="registro-usuario" required autocomplete="username">
                 </div>
                 <div class="campo">
-                    <label for="registro-correo">Correo</label>
-                    <input type="email" id="registro-correo" required>
+                    <label for="registro-correo">Correo <span class="req">(obligatorio)</span></label>
+                    <input type="email" id="registro-correo" required autocomplete="email">
                 </div>
                 <div class="campo">
-                    <label for="registro-clave">Contraseña</label>
-                    <input type="password" id="registro-clave" required minlength="4">
+                    <label for="registro-clave">Contraseña <span class="req">(obligatorio)</span></label>
+                    <input type="password" id="registro-clave" required minlength="4" autocomplete="new-password" aria-describedby="ayuda-clave">
+                    <span class="ayuda" id="ayuda-clave">Mínimo 4 caracteres.</span>
                 </div>
-                <p class="form-error oculto" id="error-registro"></p>
+                <p class="form-error oculto" id="error-registro" role="alert"></p>
                 <button type="submit" class="btn btn-relleno">Crear cuenta</button>
             </form>
         </div>
     </div>
+
+    <div class="solo-lectores" id="aviso-estado" role="status" aria-live="polite"></div>
 
     <footer class="site-footer">
         <p>EcoHuertos y Asociados</p>

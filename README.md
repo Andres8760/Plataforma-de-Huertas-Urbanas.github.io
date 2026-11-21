@@ -61,7 +61,7 @@ Se trabajaron tres principios: **Perceptible**, **Operable** y **Comprensible**.
 
 **Mejoras de apoyo:** jerarquía de encabezados correcta (un `h1` por página), contrastes de color de al menos 4.5:1 y reflow sin scroll horizontal a 320 px.
 
-## ⚙️ Backend y Base de Datos
+## Backend y Base de Datos
 
 * **API REST (`backend/`):** Desarrollada con **Node.js**, **Express** y **Mongoose** bajo el patrón de arquitectura **MVC** (`models`, `controllers`, `routes`).
 * **Persistencia en la Nube:** Conectada a **MongoDB Atlas** (base de datos `HuertasUrbanas`) para almacenar y consultar los hilos y respuestas del foro comunitario (`GET` y `POST` en `/api/threads`).

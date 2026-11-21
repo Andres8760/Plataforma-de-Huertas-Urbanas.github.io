@@ -32,24 +32,48 @@
         </div>
     </header>
 
-    <main id="contenido-principal" tabindex="-1">
+<main id="contenido-principal" tabindex="-1">
         <section class="vista vista-activa">
             <h1 class="t-pagina">Foro público</h1>
             <p class="subtitulo">Preguntas y aprendizajes compartidos por toda la comunidad.</p>
 
-            <div class="lista-hilos">
-                <article class="hilo">
-                    <h2 class="t-sub">¿Cómo controlar el pulgón sin químicos?</h2>
-                    <p>12 respuestas · Última actividad hace 2 días</p>
-                </article>
-                <article class="hilo">
-                    <h2 class="t-sub">Guía rápida: rotación de cultivos en camas pequeñas</h2>
-                    <p>7 respuestas · Última actividad hace 5 días</p>
-                </article>
-                <article class="hilo">
-                    <h2 class="t-sub">Buscamos voluntarios para huerta escolar</h2>
-                    <p>3 respuestas · Última actividad hace 1 semana</p>
-                </article>
+            <!-- Formulario para crear nuevo hilo -->
+            <article class="tarjeta-caso" style="margin-bottom: 2rem;">
+                <h2 class="t-sub">Iniciar un nuevo tema de conversación</h2>
+                <form id="form-nuevo-hilo">
+                    <div class="campo">
+                        <label for="hilo-titulo">Título del tema <span class="req">(obligatorio)</span></label>
+                        <input type="text" id="hilo-titulo" required placeholder="Ej. ¿Cómo preparar compostaje casero sin malos olores?">
+                    </div>
+
+                    <div class="campo" id="campo-autor-invitado">
+                        <label for="hilo-autor">Tu nombre o alias <span class="req">(obligatorio)</span></label>
+                        <input type="text" id="hilo-autor" required placeholder="Ej. Camila Huertera">
+                    </div>
+
+                    <div class="campo">
+                        <label for="hilo-categoria">Categoría</label>
+                        <select id="hilo-categoria">
+                            <option value="General">General</option>
+                            <option value="Siembra Urbana">Siembra Urbana</option>
+                            <option value="Compostaje">Compostaje</option>
+                            <option value="Control de Plagas">Control de Plagas</option>
+                            <option value="Riego">Riego</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="hilo-contenido">Mensaje o consulta <span class="req">(obligatorio)</span></label>
+                        <textarea id="hilo-contenido" rows="3" required placeholder="Describe tu duda, experiencia o propuesta para la comunidad..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-relleno">Publicar hilo</button>
+                </form>
+            </article>
+
+            <!-- Contenedor dinámico conectado a MongoDB Atlas -->
+            <div class="lista-hilos" id="lista-hilos">
+                <p>Cargando hilos de la comunidad...</p>
             </div>
         </section>
     </main>

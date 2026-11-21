@@ -398,3 +398,146 @@ if (new URLSearchParams(location.search).get("login") === "1" && !sesion) {
     abrirModal(modalLogin);
     history.replaceState(null, "", location.pathname);
 }
+
+/* ===================== FORO (MongoDB Atlas API) ===================== */
+
+const API_FORO = "https://humble-lamp-xr5wjxgj7wpvfpx9r-3000.app.github.dev/api/threads";
+const listaHilos = document.getElementById("lista-hilos");
+const formNuevoHilo = document.getElementById("form-nuevo-hilo");
+
+// Si hay sesión activa, pre-llena y bloquea el campo de autor
+function sincronizarAutorForo() {
+    const inputAutor = document.getElementById("hilo-autor");
+    if (!inputAutor) return;
+    if (sesion) {
+        inputAutor.value = sesion.usuario;
+        inputAutor.readOnly = true;
+    } else {
+        inputAutor.value = "";
+        inputAutor.readOnly = false;
+    }
+}
+
+async function cargarHilosForo() {
+    if (!listaHilos) return;
+
+    try {
+        const respuesta = await fetch(API_FORO);
+        const resultado = await respuesta.json();
+
+        if (!resultado.success || !resultado.data) {
+            listaHilos.innerHTML = "<p>No se pudieron cargar los hilos del foro.</p>";
+            return;
+        }
+
+        if (resultado.data.length === 0) {
+            listaHilos.innerHTML = "<p>Aún no hay hilos publicados. ¡Sé el primero en abrir un tema!</p>";
+            return;
+        }
+
+        listaHilos.innerHTML = "";
+
+        resultado.data.forEach(hilo => {
+            const fecha = new Date(hilo.fechaCreacion).toLocaleDateString("es-CO", {
+                year: "numeric", month: "short", day: "numeric"
+            });
+
+            const articulo = document.createElement("article");
+            articulo.className = "hilo tarjeta-caso";
+            articulo.style.marginBottom = "1.5rem";
+
+            const respuestasHTML = (hilo.respuestas || []).map(r => `
+                <div style="padding: 0.6rem 0.9rem; margin-top: 0.5rem; border-left: 3px solid currentColor; opacity: 0.9;">
+                    <p style="margin: 0;"><strong>${escaparHTML(r.autor)}:</strong> ${escaparHTML(r.mensaje)}</p>
+                </div>
+            `).join("");
+
+            articulo.innerHTML = `
+                <small style="font-weight: 700; text-transform: uppercase;">🌱 ${escaparHTML(hilo.categoria)}</small>
+                <h2 class="t-sub" style="margin-top: 0.3rem;">${escaparHTML(hilo.titulo)}</h2>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Publicado por <strong>${escaparHTML(hilo.autor)}</strong> · ${fecha} · ${(hilo.respuestas || []).length} respuestas</p>
+                <p style="margin: 0.8rem 0;">${escaparHTML(hilo.contenido)}</p>
+
+                <details style="margin-top: 1rem;">
+                    <summary style="cursor: pointer; font-weight: 600;">💬 Ver y agregar respuestas (${(hilo.respuestas || []).length})</summary>
+                    <div style="margin-top: 0.8rem;">
+                        ${respuestasHTML || "<p style='font-size: 0.9rem;'>Sin respuestas todavía.</p>"}
+                        
+                        <form class="form-respuesta" data-id="${hilo._id}" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <input type="text" name="autor" placeholder="Tu nombre" value="${sesion ? escaparHTML(sesion.usuario) : ""}" ${sesion ? "readonly" : ""} required>
+                            <input type="text" name="mensaje" placeholder="Escribe una respuesta..." required>
+                            <button type="submit" class="btn btn-fantasma" style="align-self: flex-start;">Responder</button>
+                        </form>
+                    </div>
+                </details>
+            `;
+
+            listaHilos.appendChild(articulo);
+        });
+
+        // Escuchar envíos de respuestas en cada hilo
+        document.querySelectorAll(".form-respuesta").forEach(form => {
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const idHilo = form.dataset.id;
+                const autor = form.elements["autor"].value.trim();
+                const mensaje = form.elements["mensaje"].value.trim();
+
+                try {
+                    const res = await fetch(`${API_FORO}/${idHilo}/replies`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ autor, mensaje })
+                    });
+
+                    if (res.ok) {
+                        anunciar("Respuesta publicada correctamente.");
+                        cargarHilosForo();
+                    }
+                } catch (err) {
+                    console.error("Error al responder:", err);
+                }
+            });
+        });
+
+    } catch (error) {
+        console.error("Error al conectar con la API del foro:", error);
+        listaHilos.innerHTML = "<p>Error de conexión con el servidor del foro. Verifica que el puerto 3000 esté en Public.</p>";
+    }
+}
+
+if (formNuevoHilo) {
+    sincronizarAutorForo();
+    formNuevoHilo.addEventListener("submit", async (evento) => {
+        evento.preventDefault();
+
+        const nuevoHilo = {
+            titulo: document.getElementById("hilo-titulo").value.trim(),
+            autor: document.getElementById("hilo-autor").value.trim(),
+            categoria: document.getElementById("hilo-categoria").value,
+            contenido: document.getElementById("hilo-contenido").value.trim()
+        };
+
+        try {
+            const respuesta = await fetch(API_FORO, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(nuevoHilo)
+            });
+
+            if (respuesta.ok) {
+                formNuevoHilo.reset();
+                sincronizarAutorForo();
+                anunciar("Hilo publicado exitosamente en la comunidad.");
+                cargarHilosForo();
+            }
+        } catch (error) {
+            console.error("Error al publicar hilo:", error);
+            anunciar("No se pudo publicar el hilo. Revisa tu conexión.");
+        }
+    });
+}
+
+if (pagina === "foro") {
+    cargarHilosForo();
+}

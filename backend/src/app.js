@@ -8,6 +8,8 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
+
+if (process.env.TRUST_PROXY) app.set('trust proxy', Number(process.env.TRUST_PROXY) || process.env.TRUST_PROXY);
 const origenesPermitidos = (process.env.CORS_ORIGINS || '')
   .split(',')
   .map((o) => o.trim())
@@ -15,6 +17,7 @@ const origenesPermitidos = (process.env.CORS_ORIGINS || '')
 
 app.use(helmet());
 app.use(
+app.use('/api/threads', require('./routes/threads.routes'));
   cors({
     origin: (origin, cb) => {
       // Sin "origin" = herramientas como curl/Postman

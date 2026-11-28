@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario · EcoHuertos</title>
+    <title>Administracion - EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="calendario">
+<body data-pagina="admin">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -32,54 +32,50 @@
         </div>
     </header>
 
-    <main id="contenido-principal" tabindex="-1">
-        <section class="vista vista-activa">
-            <h1 class="t-pagina">Calendario público</h1>
-            <p class="subtitulo">Siembras, cosechas y jornadas comunitarias abiertas a todo el mundo.</p>
+    
 
-            <div class="lista-eventos">
-                <article class="evento">
-                    <div class="evento-fecha">
-                        <span class="evento-dia" aria-hidden="true">04</span>
-                        <span class="evento-mes" aria-hidden="true">Oct</span>
-                        <span class="solo-lectores">4 de octubre</span>
-                    </div>
-                    <div class="evento-info">
-                        <h2 class="t-sub">Siembra de hortalizas de clima frío</h2>
-                        <p>Huerta El Retoño · Jornada abierta a nuevos voluntarios.</p>
-                    </div>
-                </article>
-                <article class="evento">
-                    <div class="evento-fecha">
-                        <span class="evento-dia" aria-hidden="true">18</span>
-                        <span class="evento-mes" aria-hidden="true">Oct</span>
-                        <span class="solo-lectores">18 de octubre</span>
-                    </div>
-                    <div class="evento-info">
-                        <h2 class="t-sub">Cosecha comunitaria de tomates</h2>
-                        <p>Huerta Semillas del Barrio · Trae tu propio recipiente.</p>
-                    </div>
-                </article>
-                <article class="evento">
-                    <div class="evento-fecha">
-                        <span class="evento-dia" aria-hidden="true">02</span>
-                        <span class="evento-mes" aria-hidden="true">Nov</span>
-                        <span class="solo-lectores">2 de noviembre</span>
-                    </div>
-                    <div class="evento-info">
-                        <h2 class="t-sub">Taller de compostaje casero</h2>
-                        <p>Huerta El Retoño · Abierto al público, cupos limitados.</p>
-                    </div>
-                </article>
+<main id="contenido-principal" tabindex="-1">
+    <section class="vista vista-activa">
+        <h1 class="t-pagina">Panel administrativo</h1>
+        <p id="mensaje-admin" role="status"></p>
+
+        <div id="contenido-admin" hidden>
+            <h2>Estadísticas de la plataforma</h2>
+            <div id="estadisticas-admin" class="estadisticas-admin"></div>
+
+            <h2>Gestión de usuarios</h2>
+
+            <div class="tabla-admin-contenedor">
+                <table class="tabla-admin">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuarios-admin"></tbody>
+                </table>
             </div>
-        </section>
-    </main>
+
+            <h2>Gestión de contenidos</h2>
+            <div class="acciones-huerta">
+                <a class="btn btn-relleno" href="huertas.html">Gestionar huertas</a>
+                <a class="btn btn-relleno" href="biblioteca.html">Gestionar guías</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+
 
     <nav class="tabbar" aria-label="Navegación principal">
         <a class="tab" href="index.html">
             <span class="tab-icono" aria-hidden="true">🏠</span><span>Inicio</span>
         </a>
-        <a class="tab tab-activa" href="calendario.html" aria-current="page">
+        <a class="tab" href="calendario.html">
             <span class="tab-icono" aria-hidden="true">📅</span><span>Calendario</span>
         </a>
         <a class="tab" href="huertas.html">
@@ -94,7 +90,19 @@
         <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
-    </nav>
+    
+        <a class="tab" href="biblioteca.html">
+            <span class="tab-icono" aria-hidden="true">📚</span>
+            <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
+        </a>
+        
+</nav>
 
     <div class="modal-fondo oculto" id="modal-login">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
@@ -138,8 +146,8 @@
                 </div>
                 <div class="campo">
                     <label for="registro-clave">Contraseña <span class="req">(obligatorio)</span></label>
-                    <input type="password" id="registro-clave" required minlength="4" autocomplete="new-password" aria-describedby="ayuda-clave">
-                    <span class="ayuda" id="ayuda-clave">Mínimo 4 caracteres.</span>
+                    <input type="password" id="registro-clave" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,72}" autocomplete="new-password" aria-describedby="ayuda-clave">
+                    <span class="ayuda" id="ayuda-clave">Entre 8 y 72 caracteres, con letras y números.</span>
                 </div>
                 <p class="form-error oculto" id="error-registro" role="alert"></p>
                 <button type="submit" class="btn btn-relleno">Crear cuenta</button>
@@ -153,7 +161,12 @@
         <p>EcoHuertos y Asociados</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

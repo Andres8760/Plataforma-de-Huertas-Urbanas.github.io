@@ -18,7 +18,7 @@ Los datos (usuarios, sesión y huertas) se guardan en `localStorage` del navegad
 ## Integrantes
 
 - Darlyn Dayana Grisales Orozco
-- David Alejandro Clavijo Guevara 1105368090
+- David Alejandro Clavijo Guevara 
 - Andres Felipe Gelpud Calvache
 
 ## Estado del proyecto
@@ -60,3 +60,8 @@ Se trabajaron tres principios: **Perceptible**, **Operable** y **Comprensible**.
 - 4.1.3 Mensajes de estado (huerta registrada, sesión iniciada/cerrada) anunciados a lectores de pantalla.
 
 **Mejoras de apoyo:** jerarquía de encabezados correcta (un `h1` por página), contrastes de color de al menos 4.5:1 y reflow sin scroll horizontal a 320 px.
+
+## Backend y Base de Datos
+
+* **API REST (`backend/`):** Desarrollada con **Node.js**, **Express** y **Mongoose** bajo el patrón de arquitectura **MVC** (`models`, `controllers`, `routes`).
+* **Persistencia en la Nube:** Conectada a **MongoDB Atlas** (base de datos `HuertasUrbanas`) para almacenar y consultar los hilos y respuestas del foro comunitario (`GET` y `POST` en `/api/threads`).

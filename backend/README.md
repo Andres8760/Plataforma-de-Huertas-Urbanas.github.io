@@ -1,58 +1,55 @@
-# EcoHuertos · Backend (API REST)
+# EcoHuertos - Backend
 
-Node.js + Express + MongoDB (Mongoose). Autenticación con JWT y autorización por roles (`usuario`, `admin`).
+API REST desarrollada con Node.js, Express, MongoDB Atlas y Mongoose.
 
-## Requisitos
-- Node.js 18.11 o superior
-- Una base MongoDB: cuenta gratuita en [MongoDB Atlas](https://www.mongodb.com/atlas) o MongoDB local
+## Instalación
 
-## Instalación y ejecución
-```bash
-cd backend
-npm install
-cp .env.example .env      # en Windows: copy .env.example .env
-# edita .env: MONGODB_URI y JWT_SECRET
-npm run seed              # crea usuarios de prueba y datos de ejemplo
-npm run dev               # desarrollo (o: npm start)
-```
-La API queda en `http://localhost:3000/api`. Comprueba con `http://localhost:3000/api/health`.
+    npm ci
+    cp -n .env.example .env
 
-## Variables de entorno
-| Variable | Descripción |
-|----------|-------------|
-| `PORT` | Puerto del servidor (3000) |
-| `MONGODB_URI` | Cadena de conexión de MongoDB |
-| `JWT_SECRET` | Clave para firmar tokens (mínimo 16 caracteres) |
-| `JWT_EXPIRES_IN` | Duración del token (ej. `2h`) |
-| `BCRYPT_ROUNDS` | Costo del hash de contraseñas |
-| `CORS_ORIGINS` | Orígenes del front permitidos, separados por coma |
-| `SEED_ADMIN_PASSWORD`, `SEED_USER_PASSWORD` | Contraseñas de los usuarios de prueba |
+Configurar las variables de entorno con las credenciales propias.
 
-## Usuarios de prueba (tras `npm run seed`)
-| Rol | Correo | Contraseña |
-|-----|--------|-----------|
-| admin | admin@ecohuertos.test | Admin12345 |
-| usuario | usuario@ecohuertos.test | Usuario12345 |
+## Ejecución
 
-## Probar rápido con curl
-```bash
-curl -X POST http://localhost:3000/api/auth/login -H "Content-Type: application/json" \
-  -d '{"identificador":"usuario@ecohuertos.test","password":"Usuario12345"}'
+    npm run seed
+    npm run dev
 
-curl http://localhost:3000/api/huertas
-```
+El servidor utiliza el puerto 3000.
 
-## Estructura
-```
-src/
-  config/        conexión a la base de datos
-  controllers/   lógica de cada recurso
-  middlewares/   auth (JWT), role (permisos), validate, errorHandler
-  models/        User, Huerta, Guia
-  routes/        definición de endpoints y reglas de validación
-  utils/         JWT, errores, helpers
-  app.js         configuración de Express
-  server.js      arranque
-  seed.js        datos de prueba
-```
-Documentación de endpoints: [`/docs/api.md`](../docs/api.md) · Roles: [`/docs/roles-y-permisos.md`](../docs/roles-y-permisos.md)
+## Comprobar el servidor
+
+    curl http://localhost:3000/api/health
+
+## Funcionalidades
+
+- Registro y autenticación JWT.
+- Autorización por roles.
+- CRUD de huertas.
+- Biblioteca de guías.
+- Foro comunitario.
+- Calendario y actividades.
+- Panel administrativo.
+
+## Seguridad
+
+- Hash de contraseñas con bcrypt.
+- Validación de datos con express-validator.
+- Protección HTTP con Helmet.
+- Control de orígenes mediante CORS.
+- Limitación de peticiones.
+- Variables de entorno para credenciales.
+
+## Documentación
+
+- [README principal](../README.md)
+- [API REST](../docs/api.md)
+- [Roles y permisos](../docs/roles-y-permisos.md)
+- [Modelo general](../docs/modelo-general.md)
+- [Características FDD](../docs/lista-de-caracteristicas.md)
+
+## Despliegue
+
+El backend se ejecuta mediante GitHub Codespaces.
+El puerto 3000 debe estar disponible para el frontend.
+
+El espacio de código debe permanecer activo para atender peticiones.

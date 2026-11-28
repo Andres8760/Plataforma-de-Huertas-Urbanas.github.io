@@ -1,4 +1,5 @@
 const Huerta = require('../models/Huerta');
+const Actividad = require('../models/Actividad');
 const AppError = require('../utils/AppError');
 const asyncHandler = require('../utils/asyncHandler');
 const { pick, escapeRegex, getPagination, canManage } = require('../utils/helpers');
@@ -62,6 +63,7 @@ exports.update = asyncHandler(async (req, res) => {
 exports.remove = asyncHandler(async (req, res) => {
   const huerta = await buscarHuerta(req.params.id);
   if (!canManage(req.user, huerta)) throw new AppError('Solo puedes eliminar tus propias huertas', 403);
+  await Actividad.deleteMany({ huerta: huerta._id });
   await huerta.deleteOne();
   res.json({ ok: true, mensaje: 'Huerta eliminada' });
 });

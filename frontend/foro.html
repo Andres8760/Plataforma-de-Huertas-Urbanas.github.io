@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio · EcoHuertos</title>
+    <title>Foro · EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="inicio">
+<body data-pagina="foro">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -32,72 +32,60 @@
         </div>
     </header>
 
-    <main id="contenido-principal" tabindex="-1">
+<main id="contenido-principal" tabindex="-1">
         <section class="vista vista-activa">
+            <h1 class="t-pagina">Foro público</h1>
+            <p class="subtitulo">Preguntas y aprendizajes compartidos por toda la comunidad.</p>
 
-            <div class="hero">
-                <div class="hero-texto">
-                    <p class="hero-eyebrow">Agricultura urbana en red</p>
-                    <h1>Cultivar en comunidad, cosechar en red.</h1>
-                    <p class="hero-parrafo">
-                        EcoHuertos es una aplicación web que conecta a vecinos, colectivos y
-                        organizaciones comunitarias interesadas en la agricultura urbana. La
-                        plataforma permite registrar y gestionar huertas comunitarias,
-                        coordinar labores de siembra y cosecha entre varios usuarios, y
-                        centralizar el conocimiento agrícola de la comunidad a través de un
-                        foro y una biblioteca de guías.
-                    </p>
-                    <div class="hero-acciones">
-                        <a href="huertas.html" class="btn btn-relleno btn-grande">Registra tu huerta</a>
-                        <a href="#seccion-problema" class="btn btn-texto">¿Qué problema resuelve?</a>
+            <!-- Formulario para crear nuevo hilo -->
+            <article class="tarjeta-caso" style="margin-bottom: 2rem;">
+                <h2 class="t-sub">Iniciar un nuevo tema de conversación</h2>
+                
+<p id="mensaje-foro" role="status"></p>
+<p id="invitacion-foro">
+    Inicia sesión para crear publicaciones y responder en el foro.
+</p>
+<form id="form-nuevo-hilo" hidden>
+
+                    <div class="campo">
+                        <label for="hilo-titulo">Título del tema <span class="req">(obligatorio)</span></label>
+                        <input type="text" id="hilo-titulo" required minlength="3" maxlength="150" placeholder="Ej. ¿Cómo preparar compostaje casero sin malos olores?">
                     </div>
-                </div>
 
-                <div class="hero-imagen">
-                    <img
-                        src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?fm=jpg&q=80&w=1200&auto=format&fit=crop"
-                        alt="Plántulas verdes brotando de la tierra en una huerta urbana comunitaria"
-                        width="1200" height="360">
-                </div>
+                    <div class="campo" id="campo-autor-invitado">
+                        <label for="hilo-autor">Tu nombre o alias <span class="req">(obligatorio)</span></label>
+                        <input type="text" id="hilo-autor" required readonly placeholder="Ej. Camila Huertera">
+                    </div>
+
+                    <div class="campo">
+                        <label for="hilo-categoria">Categoría</label>
+                        <select id="hilo-categoria">
+                            <option value="General">General</option>
+                            <option value="Siembra Urbana">Siembra Urbana</option>
+                            <option value="Compostaje">Compostaje</option>
+                            <option value="Control de Plagas">Control de Plagas</option>
+                            <option value="Riego">Riego</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="hilo-contenido">Mensaje o consulta <span class="req">(obligatorio)</span></label>
+                        <textarea id="hilo-contenido" rows="3" required minlength="5" maxlength="2000" placeholder="Describe tu duda, experiencia o propuesta para la comunidad..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-relleno">Publicar hilo</button>
+                </form>
+            </article>
+
+            <!-- Contenedor dinámico conectado a MongoDB Atlas -->
+            <div class="lista-hilos" id="lista-hilos">
+                <p>Cargando hilos de la comunidad...</p>
             </div>
-
-            <section id="seccion-problema" class="franja">
-                <h2>El problema que resolvemos</h2>
-                <p>
-                    Hoy, quienes cultivan huertas urbanas se organizan de forma dispersa:
-                    por chats informales o de manera presencial. Eso dificulta el
-                    seguimiento de actividades, la planificación de cultivos y el
-                    crecimiento de la red de huertas. EcoHuertos centraliza esa
-                    coordinación en un solo lugar.
-                </p>
-            </section>
-
-            <section class="franja">
-                <h2>Pensado para</h2>
-                <div class="tarjetas-publico">
-                    <article class="tarjeta">
-                        <span class="tarjeta-icono" aria-hidden="true">🏡</span>
-                        <h3>Vecinos y familias</h3>
-                        <p>Con o sin experiencia previa en agricultura urbana.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="tarjeta-icono" aria-hidden="true">🤝</span>
-                        <h3>Colectivos y JAC</h3>
-                        <p>Juntas de acción comunal que administran huertas colectivas.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="tarjeta-icono" aria-hidden="true">🎓</span>
-                        <h3>Instituciones</h3>
-                        <p>Centros educativos y ambientales que promueven huertas urbanas.</p>
-                    </article>
-                </div>
-            </section>
-
         </section>
     </main>
 
     <nav class="tabbar" aria-label="Navegación principal">
-        <a class="tab tab-activa" href="index.html" aria-current="page">
+        <a class="tab" href="index.html">
             <span class="tab-icono" aria-hidden="true">🏠</span><span>Inicio</span>
         </a>
         <a class="tab" href="calendario.html">
@@ -106,7 +94,7 @@
         <a class="tab" href="huertas.html">
             <span class="tab-icono" aria-hidden="true">🌱</span><span>Huertas</span>
         </a>
-        <a class="tab" href="foro.html">
+        <a class="tab tab-activa" href="foro.html" aria-current="page">
             <span class="tab-icono" aria-hidden="true">💬</span><span>Foro</span>
         </a>
         <a class="tab" href="nosotros.html">
@@ -183,23 +171,14 @@
     <div class="solo-lectores" id="aviso-estado" role="status" aria-live="polite"></div>
 
     <footer class="site-footer">
-    <p>EcoHuertos y Asociados · © 2026</p>
-    <details style="max-width: 720px; margin: 0.8rem auto 0 auto; text-align: left;">
-        <summary style="cursor: pointer; font-weight: 600;">📜 Términos y Condiciones de Uso</summary>
-        <div style="margin-top: 0.6rem; font-size: 0.9rem; line-height: 1.5;">
-            <p><strong>1. Propósito Comunitario:</strong> EcoHuertos es una plataforma educativa e informativa orientada a promover la agricultura urbana sostenible y el intercambio de saberes.</p>
-            <p><strong>2. Normas del Foro:</strong> Cada participante es responsable de sus publicaciones. No se permite lenguaje ofensivo, spam comercial ni recomendaciones que promuevan el uso de agroquímicos tóxicos en entornos domésticos.</p>
-            <p><strong>3. Contenido Colaborativo:</strong> Las experiencias, guías y registros de huertas compartidos en la plataforma son de consulta libre para el aprendizaje colectivo de la comunidad.</p>
-            <p><strong>4. Uso de Datos:</strong> Los nombres o alias registrados se utilizan exclusivamente para identificar la autoría de las huertas, hilos y respuestas dentro del sitio.</p>
-        </div>
-    </details>
-</footer>
+        <p>EcoHuertos y Asociados</p>
+    </footer>
 
-    <script src="api.js"></script>
-    <script src="script.js"></script>
-    <script src="huertas.js"></script>
-    <script src="foro.js"></script>
-    <script src="auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

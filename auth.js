@@ -11,6 +11,7 @@ function iniciarSesion(usuario, token) {
     };
 
     actualizarUISesion();
+    if (typeof cargarGuias === "function") cargarGuias();
     sincronizarAutorForo();
     renderizarHuertas();
 }
@@ -38,6 +39,7 @@ async function cerrarSesion() {
         eliminarToken();
         sesion = null;
         actualizarUISesion();
+    if (typeof cargarGuias === "function") cargarGuias();
         sincronizarAutorForo();
     renderizarHuertas();
 
@@ -107,6 +109,7 @@ async function iniciarPagina() {
     await recuperarSesion();
 
     actualizarUISesion();
+    if (typeof cargarGuias === "function") cargarGuias();
     sincronizarAutorForo();
     renderizarHuertas();
     renderizarHuertas();

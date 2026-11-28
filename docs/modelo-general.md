@@ -9,6 +9,8 @@ erDiagram
     USER ||--o{ ACTIVIDAD : registra
     HUERTA ||--o{ ACTIVIDAD : contiene
     THREAD ||--o{ RESPUESTA : contiene
+    USER o|--o{ THREAD : publica
+    USER o|--o{ RESPUESTA : responde
 
     USER {
         ObjectId _id PK
@@ -61,13 +63,16 @@ erDiagram
         string categoria
         string contenido
         string autor
+        ObjectId autorId FK
         date fechaCreacion
         array respuestas
     }
 
     RESPUESTA {
         string autor
+        ObjectId autorId FK
         string mensaje
+        date fecha
     }
 ```
 

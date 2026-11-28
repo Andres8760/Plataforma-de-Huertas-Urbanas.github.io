@@ -104,7 +104,7 @@ Ejemplo de petición:
 
     {
       "titulo": "Cultivo de tomate",
-      "categoria": "CATEGORIA_VALIDA",
+      "categoria": "General",
       "contenido": "Compartamos consejos para cultivar tomates."
     }
 

@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi proyecto · EcoHuertos</title>
+    <title>Foro · EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="proyecto">
+<body data-pagina="foro">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -32,40 +32,54 @@
         </div>
     </header>
 
-    <main id="contenido-principal" tabindex="-1">
+<main id="contenido-principal" tabindex="-1">
         <section class="vista vista-activa">
-            <h1 class="t-pagina">Mi proyecto</h1>
-            <p class="subtitulo">Tu espacio personal dentro de EcoHuertos.</p>
+            <h1 class="t-pagina">Foro público</h1>
+            <p class="subtitulo">Preguntas y aprendizajes compartidos por toda la comunidad.</p>
 
-            <nav class="subtabs" aria-label="Secciones de Mi proyecto">
-                <a class="subtab subtab-activa" href="#info" data-panel="panel-info" aria-current="true">Información</a>
-                <a class="subtab" href="#mi-huerta" data-panel="panel-mi-huerta">Mi huerta</a>
-                <a class="subtab" href="#mi-foro" data-panel="panel-mi-foro">Mi foro</a>
-                <a class="subtab" href="#mi-calendario" data-panel="panel-mi-calendario">Mi calendario</a>
-            </nav>
+            <!-- Formulario para crear nuevo hilo -->
+            <article class="tarjeta-caso" style="margin-bottom: 2rem;">
+                <h2 class="t-sub">Iniciar un nuevo tema de conversación</h2>
+                
+<p id="mensaje-foro" role="status"></p>
+<p id="invitacion-foro">
+    Inicia sesión para crear publicaciones y responder en el foro.
+</p>
+<form id="form-nuevo-hilo" hidden>
 
-            <div id="panel-info" class="panel panel-activo">
-                <h2 class="t-sub">Información de tu cuenta</h2>
-                <p>Nombre completo: <strong id="info-nombre-completo">—</strong></p>
-                <p>Usuario: <strong id="info-usuario">—</strong></p>
-                <p>Correo: <strong id="info-correo">—</strong></p>
-                <p>Desde aquí podrás administrar tus datos y preferencias de la comunidad.</p>
-            </div>
+                    <div class="campo">
+                        <label for="hilo-titulo">Título del tema <span class="req">(obligatorio)</span></label>
+                        <input type="text" id="hilo-titulo" required minlength="3" maxlength="150" placeholder="Ej. ¿Cómo preparar compostaje casero sin malos olores?">
+                    </div>
 
-            <div id="panel-mi-huerta" class="panel">
-                <h2 class="t-sub">Mi huerta</h2>
-                <p class="subtitulo">Huertas que has registrado con tu cuenta.</p>
-                <div id="contenedor-mis-huertas" class="lista-huertas"></div>
-            </div>
+                    <div class="campo" id="campo-autor-invitado">
+                        <label for="hilo-autor">Tu nombre o alias <span class="req">(obligatorio)</span></label>
+                        <input type="text" id="hilo-autor" required readonly placeholder="Ej. Camila Huertera">
+                    </div>
 
-            <div id="panel-mi-foro" class="panel">
-                <h2 class="t-sub">Mi foro</h2>
-                <p>Aún no has publicado ni respondido ningún hilo. Cuando lo hagas, aparecerá aquí.</p>
-            </div>
+                    <div class="campo">
+                        <label for="hilo-categoria">Categoría</label>
+                        <select id="hilo-categoria">
+                            <option value="General">General</option>
+                            <option value="Siembra Urbana">Siembra Urbana</option>
+                            <option value="Compostaje">Compostaje</option>
+                            <option value="Control de Plagas">Control de Plagas</option>
+                            <option value="Riego">Riego</option>
+                        </select>
+                    </div>
 
-            <div id="panel-mi-calendario" class="panel">
-                <h2 class="t-sub">Mi calendario</h2>
-                <p>Aún no te has apuntado a ninguna actividad. Explora el <a href="calendario.html">calendario público</a> para unirte a una.</p>
+                    <div class="campo">
+                        <label for="hilo-contenido">Mensaje o consulta <span class="req">(obligatorio)</span></label>
+                        <textarea id="hilo-contenido" rows="3" required minlength="5" maxlength="2000" placeholder="Describe tu duda, experiencia o propuesta para la comunidad..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-relleno">Publicar hilo</button>
+                </form>
+            </article>
+
+            <!-- Contenedor dinámico conectado a MongoDB Atlas -->
+            <div class="lista-hilos" id="lista-hilos">
+                <p>Cargando hilos de la comunidad...</p>
             </div>
         </section>
     </main>
@@ -80,16 +94,28 @@
         <a class="tab" href="huertas.html">
             <span class="tab-icono" aria-hidden="true">🌱</span><span>Huertas</span>
         </a>
-        <a class="tab" href="foro.html">
+        <a class="tab tab-activa" href="foro.html" aria-current="page">
             <span class="tab-icono" aria-hidden="true">💬</span><span>Foro</span>
         </a>
         <a class="tab" href="nosotros.html">
             <span class="tab-icono" aria-hidden="true">🌻</span><span>Nosotros</span>
         </a>
-        <a class="tab tab-activa oculto" href="mi-proyecto.html" id="tab-proyecto" aria-current="page">
+        <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
-    </nav>
+    
+        <a class="tab" href="biblioteca.html">
+            <span class="tab-icono" aria-hidden="true">📚</span>
+            <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
+        </a>
+        
+</nav>
 
     <div class="modal-fondo oculto" id="modal-login">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
@@ -133,8 +159,8 @@
                 </div>
                 <div class="campo">
                     <label for="registro-clave">Contraseña <span class="req">(obligatorio)</span></label>
-                    <input type="password" id="registro-clave" required minlength="4" autocomplete="new-password" aria-describedby="ayuda-clave">
-                    <span class="ayuda" id="ayuda-clave">Mínimo 4 caracteres.</span>
+                    <input type="password" id="registro-clave" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,72}" autocomplete="new-password" aria-describedby="ayuda-clave">
+                    <span class="ayuda" id="ayuda-clave">Entre 8 y 72 caracteres, con letras y números.</span>
                 </div>
                 <p class="form-error oculto" id="error-registro" role="alert"></p>
                 <button type="submit" class="btn btn-relleno">Crear cuenta</button>
@@ -148,7 +174,11 @@
         <p>EcoHuertos y Asociados</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

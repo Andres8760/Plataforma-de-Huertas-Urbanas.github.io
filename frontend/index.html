@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body data-pagina="inicio">
@@ -115,7 +115,19 @@
         <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
-    </nav>
+    
+        <a class="tab" href="biblioteca.html">
+            <span class="tab-icono" aria-hidden="true">📚</span>
+            <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
+        </a>
+        
+</nav>
 
     <div class="modal-fondo oculto" id="modal-login">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
@@ -159,8 +171,8 @@
                 </div>
                 <div class="campo">
                     <label for="registro-clave">Contraseña <span class="req">(obligatorio)</span></label>
-                    <input type="password" id="registro-clave" required minlength="4" autocomplete="new-password" aria-describedby="ayuda-clave">
-                    <span class="ayuda" id="ayuda-clave">Mínimo 4 caracteres.</span>
+                    <input type="password" id="registro-clave" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,72}" autocomplete="new-password" aria-describedby="ayuda-clave">
+                    <span class="ayuda" id="ayuda-clave">Entre 8 y 72 caracteres, con letras y números.</span>
                 </div>
                 <p class="form-error oculto" id="error-registro" role="alert"></p>
                 <button type="submit" class="btn btn-relleno">Crear cuenta</button>
@@ -183,7 +195,11 @@
     </details>
 </footer>
 
-    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

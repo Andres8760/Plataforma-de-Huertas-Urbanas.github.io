@@ -11,6 +11,7 @@ function iniciarSesion(usuario, token) {
     };
 
     actualizarUISesion();
+    actualizarPermisosAdmin();
     if (typeof cargarGuias === "function") cargarGuias();
     sincronizarAutorForo();
     renderizarHuertas();
@@ -39,6 +40,7 @@ async function cerrarSesion() {
         eliminarToken();
         sesion = null;
         actualizarUISesion();
+    actualizarPermisosAdmin();
     if (typeof cargarGuias === "function") cargarGuias();
         sincronizarAutorForo();
     renderizarHuertas();
@@ -109,6 +111,7 @@ async function iniciarPagina() {
     await recuperarSesion();
 
     actualizarUISesion();
+    actualizarPermisosAdmin();
     if (typeof cargarGuias === "function") cargarGuias();
     sincronizarAutorForo();
     renderizarHuertas();
@@ -131,3 +134,15 @@ async function iniciarPagina() {
 }
 
 iniciarPagina();
+
+function actualizarPermisosAdmin() {
+    const enlace = document.getElementById("enlace-admin");
+
+    if (enlace) {
+        enlace.classList.toggle("oculto", sesion?.role !== "admin");
+    }
+
+    if (typeof cargarPanelAdmin === "function") {
+        cargarPanelAdmin();
+    }
+}

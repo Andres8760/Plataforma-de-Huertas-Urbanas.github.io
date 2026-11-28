@@ -768,3 +768,52 @@ p a,
     margin-bottom: 16px;
     border-radius: 8px;
 }
+
+/* Panel administrativo */
+.estadisticas-admin {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin: 20px 0 30px;
+}
+
+.tarjeta-estadistica {
+    border: 1px solid #aac9a8;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    background: rgba(100, 160, 90, 0.08);
+}
+
+.tarjeta-estadistica strong {
+    font-size: 32px;
+}
+
+.tabla-admin-contenedor {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-admin th,
+.tabla-admin td {
+    padding: 12px;
+    border-bottom: 1px solid #aac9a8;
+    text-align: left;
+}
+
+.tabla-admin td .btn {
+    margin: 4px;
+}
+
+#mensaje-admin {
+    margin: 12px 0;
+}
+
+#contenido-admin[hidden] {
+    display: none;
+}

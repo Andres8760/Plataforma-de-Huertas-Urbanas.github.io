@@ -28,6 +28,10 @@ Respuestas correctas: `{ "ok": true, "data": ... }`. Errores: `{ "ok": false, "m
 | GET | `/admin/users` | Sí | admin | 200 | E2. Listar usuarios |
 | PATCH | `/admin/users/:id/role` | Sí | admin | 200 | E3. Cambiar rol |
 | DELETE | `/admin/users/:id` | Sí | admin | 200 | E4. Eliminar usuario |
+| GET | `/threads` | No | — | 200 | G1. Listar hilos del foro (`?page=&limit=`) |
+| POST | `/threads` | Sí | usuario, admin | 201 | G2. Publicar un hilo |
+| POST | `/threads/:id/replies` | Sí | usuario, admin | 201 | G3. Responder a un hilo |
+| DELETE | `/threads/:id` | Sí | admin | 200 | G4. Eliminar un hilo (moderación) |
 
 ## Códigos de estado usados
 200 OK · 201 Created · 400 datos inválidos · 401 sin sesión/token inválido · 403 sin permiso · 404 no encontrado · 409 duplicado (usuario/correo) · 429 demasiados intentos · 500 error del servidor.
@@ -74,9 +78,39 @@ Respuesta `201`:
 }
 ```
 
+### POST `/threads` (requiere token)
+Categorías válidas: `Compostaje`, `Control de Plagas`, `Siembra Urbana`, `Riego`, `General` (por defecto).
+El autor se toma del token; no se envía en el cuerpo.
+```json
+{
+  "titulo": "¿Cómo preparar compostaje casero sin malos olores?",
+  "categoria": "Compostaje",
+  "contenido": "Tengo un balcón pequeño y quiero empezar a compostar."
+}
+```
+Respuesta `201`:
+```json
+{
+  "ok": true, "mensaje": "Hilo publicado",
+  "data": { "_id": "6661...", "titulo": "¿Cómo preparar compostaje casero sin malos olores?", "autor": "anap", "categoria": "Compostaje", "respuestas": [] }
+}
+```
+
+### POST `/threads/:id/replies` (requiere token)
+```json
+{ "mensaje": "Mezcla restos de cocina con hojas secas y airea cada semana." }
+```
+Respuesta `201` con el hilo actualizado (`data.respuestas` incluye la nueva respuesta).
+
 ### Error de validación (400)
 ```json
 { "ok": false, "mensaje": "Datos inválidos", "detalles": [ { "campo": "nombre", "mensaje": "El nombre debe tener entre 2 y 100 caracteres" } ] }
+```
+
+### Sin sesión (401)
+`POST /threads` sin cabecera `Authorization`:
+```json
+{ "ok": false, "mensaje": "Debes iniciar sesión" }
 ```
 
 ### Error de autorización (403)

@@ -1,6 +1,7 @@
 # EcoHuertos · Backend (API REST)
 
 Node.js + Express + MongoDB (Mongoose). Autenticación con JWT y autorización por roles (`usuario`, `admin`).
+Recursos: huertas, guías, foro (hilos y respuestas) y panel administrativo.
 
 ## Requisitos
 - Node.js 18.11 o superior
@@ -17,6 +18,8 @@ npm run dev               # desarrollo (o: npm start)
 ```
 La API queda en `http://localhost:3000/api`. Comprueba con `http://localhost:3000/api/health`.
 
+> Si venías usando la versión anterior del foro: la variable de conexión ahora se llama `MONGODB_URI` (antes `MONGO_URI`).
+
 ## Variables de entorno
 | Variable | Descripción |
 |----------|-------------|
@@ -25,7 +28,8 @@ La API queda en `http://localhost:3000/api`. Comprueba con `http://localhost:300
 | `JWT_SECRET` | Clave para firmar tokens (mínimo 16 caracteres) |
 | `JWT_EXPIRES_IN` | Duración del token (ej. `2h`) |
 | `BCRYPT_ROUNDS` | Costo del hash de contraseñas |
-| `CORS_ORIGINS` | Orígenes del front permitidos, separados por coma |
+| `CORS_ORIGINS` | Orígenes del front permitidos, separados por coma (sin barra final) |
+| `TRUST_PROXY` | Opcional. `1` si la API corre detrás de un proxy (Codespaces, Render...) |
 | `SEED_ADMIN_PASSWORD`, `SEED_USER_PASSWORD` | Contraseñas de los usuarios de prueba |
 
 ## Usuarios de prueba (tras `npm run seed`)
@@ -40,6 +44,7 @@ curl -X POST http://localhost:3000/api/auth/login -H "Content-Type: application/
   -d '{"identificador":"usuario@ecohuertos.test","password":"Usuario12345"}'
 
 curl http://localhost:3000/api/huertas
+curl http://localhost:3000/api/threads
 ```
 
 ## Estructura
@@ -48,7 +53,7 @@ src/
   config/        conexión a la base de datos
   controllers/   lógica de cada recurso
   middlewares/   auth (JWT), role (permisos), validate, errorHandler
-  models/        User, Huerta, Guia
+  models/        User, Huerta, Guia, Thread
   routes/        definición de endpoints y reglas de validación
   utils/         JWT, errores, helpers
   app.js         configuración de Express

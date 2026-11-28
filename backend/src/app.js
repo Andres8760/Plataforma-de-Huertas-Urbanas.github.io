@@ -8,7 +8,7 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
-
+// Detras de un proxy (Codespaces, Render...) define TRUST_PROXY=1 en .env
 if (process.env.TRUST_PROXY) app.set('trust proxy', Number(process.env.TRUST_PROXY) || process.env.TRUST_PROXY);
 const origenesPermitidos = (process.env.CORS_ORIGINS || '')
   .split(',')
@@ -17,7 +17,6 @@ const origenesPermitidos = (process.env.CORS_ORIGINS || '')
 
 app.use(helmet());
 app.use(
-app.use('/api/threads', require('./routes/threads.routes'));
   cors({
     origin: (origin, cb) => {
       // Sin "origin" = herramientas como curl/Postman
@@ -42,6 +41,7 @@ app.use('/api/auth', authLimiter, require('./routes/auth.routes'));
 app.use('/api/huertas', require('./routes/huertas.routes'));
 app.use('/api/guias', require('./routes/guias.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
+app.use('/api/threads', require('./routes/threads.routes'));
 
 app.use((req, res, next) => next(new AppError(`Ruta no encontrada: ${req.method} ${req.originalUrl}`, 404)));
 app.use(errorHandler);

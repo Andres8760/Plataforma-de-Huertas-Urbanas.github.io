@@ -15,6 +15,9 @@ Todo registro nuevo recibe el rol `usuario`; solo un admin puede cambiar el rol 
 | Registrarse (B1) e iniciar sesión (B2) | ✅ | ✅ | ✅ |
 | Ver perfil y cerrar sesión (B3, B4) | ❌ | ✅ | ✅ |
 | Panel administrativo: estadísticas, usuarios, cambio de rol (E1–E4) | ❌ | ❌ | ✅ |
+| Leer el foro (G1) | ✅ | ✅ | ✅ |
+| Publicar un hilo y responder (G2, G3) | ❌ | ✅ | ✅ |
+| Eliminar un hilo del foro (G4) | ❌ | ❌ | ✅ |
 
 ## Códigos de error asociados
 - **401 Unauthorized**: no hay token, es inválido o expiró.

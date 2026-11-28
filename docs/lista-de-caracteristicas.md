@@ -30,6 +30,9 @@ Plantilla: `<acción> <resultado> <objeto>`. Entidad principal: **Huerta**.
 | E4 | Eliminar un usuario | E. Panel administrativo (extra) | _por asignar_ | Backend ✅ · Front ⏳ |
 | F1 | Registrar las actividades de una huerta | F. Actividades y calendario (extra) | _por asignar_ | ⏳ |
 | F2 | Consultar el calendario de siembra y cosecha | F. Actividades y calendario (extra) | _por asignar_ | ⏳ |
-| F3 | Publicar mensajes en el foro | F. Foro (extra) | _por asignar_ | ⏳ |
+| G1 | Listar los hilos del foro | G. Foro (extra) | _por asignar_ | Backend ✅ · Front 🔧 (debe adaptarse a la API con sesión) |
+| G2 | Publicar un hilo en el foro | G. Foro (extra) | _por asignar_ | Backend ✅ · Front 🔧 |
+| G3 | Responder a un hilo del foro | G. Foro (extra) | _por asignar_ | Backend ✅ · Front 🔧 |
+| G4 | Eliminar un hilo del foro (moderación) | G. Foro (extra) | _por asignar_ | Backend ✅ · Front ⏳ |
 
-Las características **A, B y C** son el mínimo obligatorio y no pueden eliminarse. D, E y F son adicionales del MVP.
+Las características **A, B y C** son el mínimo obligatorio y no pueden eliminarse. D, E, F y G son adicionales del MVP.

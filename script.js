@@ -9,13 +9,10 @@ function leerLS(clave, porDefecto) {
     }
 }
 
-let huertas = leerLS("ecohuertos_huertas", []);
 
 let sesion = null;
 
-function guardarHuertas() {
-    localStorage.setItem("ecohuertos_huertas", JSON.stringify(huertas));
-}
+
 
 function escaparHTML(texto) {
     const div = document.createElement("div");
@@ -44,80 +41,6 @@ function anunciar(mensaje) {
     if (!aviso) return;
     aviso.textContent = "";
     setTimeout(() => { aviso.textContent = mensaje; }, 50);
-}
-
-/* ===================== HUERTAS ===================== */
-
-function crearTarjetaHuerta(huerta, nivel) {
-    const tarjeta = document.createElement("article");
-    tarjeta.className = "tarjeta-caso";
-    tarjeta.innerHTML = `
-        <${nivel} class="t-sub">${escaparHTML(huerta.nombre)}</${nivel}>
-        <p>Ubicación: ${escaparHTML(huerta.ubicacion)}</p>
-        <p>Cultivo: ${escaparHTML(huerta.cultivo)}</p>
-        ${huerta.autor ? `<p>Registrada por: ${escaparHTML(huerta.autor)}</p>` : ""}
-    `;
-    return tarjeta;
-}
-
-function renderizarHuertas() {
-    if (!contenedorHuertas) return;
-
-    contenedorHuertas.innerHTML = "";
-
-    if (huertas.length === 0) {
-        contenedorHuertas.innerHTML = "<p>Aún no hay huertas registradas.</p>";
-        return;
-    }
-
-    huertas.forEach(huerta => {
-        contenedorHuertas.appendChild(crearTarjetaHuerta(huerta, "h2"));
-    });
-}
-
-function renderizarMisHuertas() {
-    if (!contenedorMisHuertas) return;
-
-    contenedorMisHuertas.innerHTML = "";
-
-    if (!sesion) {
-        contenedorMisHuertas.innerHTML = "<p>Inicia sesión para ver tus huertas registradas.</p>";
-        return;
-    }
-
-    const misHuertas = huertas.filter(h => h.autor === sesion.usuario);
-
-    if (misHuertas.length === 0) {
-        contenedorMisHuertas.innerHTML = "<p>Todavía no has registrado ninguna huerta.</p>";
-        return;
-    }
-
-    misHuertas.forEach(huerta => {
-        contenedorMisHuertas.appendChild(crearTarjetaHuerta(huerta, "h3"));
-    });
-}
-
-if (formulario) {
-    formulario.addEventListener("submit", (evento) => {
-        evento.preventDefault();
-
-        huertas.push({
-            nombre: document.getElementById("nombre").value.trim(),
-            ubicacion: document.getElementById("ubicacion").value.trim(),
-            cultivo: document.getElementById("cultivo").value.trim(),
-            autor: sesion ? sesion.usuario : null
-        });
-
-        guardarHuertas();
-        renderizarHuertas();
-
-        const estado = document.getElementById("estado-huerta");
-        estado.textContent = `La huerta "${huertas[huertas.length - 1].nombre}" se registró correctamente.`;
-        estado.classList.remove("oculto");
-
-        formulario.reset();
-        document.getElementById("nombre").focus();
-    });
 }
 
 /* ===================== SUBPESTAÑAS (Mi proyecto) ===================== */

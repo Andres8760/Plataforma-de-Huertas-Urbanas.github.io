@@ -12,6 +12,7 @@ function iniciarSesion(usuario, token) {
 
     actualizarUISesion();
     sincronizarAutorForo();
+    renderizarHuertas();
 }
 
 async function recuperarSesion() {
@@ -38,6 +39,7 @@ async function cerrarSesion() {
         sesion = null;
         actualizarUISesion();
         sincronizarAutorForo();
+    renderizarHuertas();
 
         if (pagina === "proyecto") {
             location.href = "index.html";
@@ -106,6 +108,7 @@ async function iniciarPagina() {
 
     actualizarUISesion();
     sincronizarAutorForo();
+    renderizarHuertas();
     renderizarHuertas();
 
     if (pagina === "proyecto") {

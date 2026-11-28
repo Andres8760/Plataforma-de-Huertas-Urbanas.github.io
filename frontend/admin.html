@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foro · EcoHuertos</title>
+    <title>Administracion - EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="foro">
+<body data-pagina="admin">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -32,51 +32,44 @@
         </div>
     </header>
 
+    
+
 <main id="contenido-principal" tabindex="-1">
-        <section class="vista vista-activa">
-            <h1 class="t-pagina">Foro público</h1>
-            <p class="subtitulo">Preguntas y aprendizajes compartidos por toda la comunidad.</p>
+    <section class="vista vista-activa">
+        <h1 class="t-pagina">Panel administrativo</h1>
+        <p id="mensaje-admin" role="status"></p>
 
-            <!-- Formulario para crear nuevo hilo -->
-            <article class="tarjeta-caso" style="margin-bottom: 2rem;">
-                <h2 class="t-sub">Iniciar un nuevo tema de conversación</h2>
-                <form id="form-nuevo-hilo">
-                    <div class="campo">
-                        <label for="hilo-titulo">Título del tema <span class="req">(obligatorio)</span></label>
-                        <input type="text" id="hilo-titulo" required placeholder="Ej. ¿Cómo preparar compostaje casero sin malos olores?">
-                    </div>
+        <div id="contenido-admin" hidden>
+            <h2>Estadísticas de la plataforma</h2>
+            <div id="estadisticas-admin" class="estadisticas-admin"></div>
 
-                    <div class="campo" id="campo-autor-invitado">
-                        <label for="hilo-autor">Tu nombre o alias <span class="req">(obligatorio)</span></label>
-                        <input type="text" id="hilo-autor" required placeholder="Ej. Camila Huertera">
-                    </div>
+            <h2>Gestión de usuarios</h2>
 
-                    <div class="campo">
-                        <label for="hilo-categoria">Categoría</label>
-                        <select id="hilo-categoria">
-                            <option value="General">General</option>
-                            <option value="Siembra Urbana">Siembra Urbana</option>
-                            <option value="Compostaje">Compostaje</option>
-                            <option value="Control de Plagas">Control de Plagas</option>
-                            <option value="Riego">Riego</option>
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="hilo-contenido">Mensaje o consulta <span class="req">(obligatorio)</span></label>
-                        <textarea id="hilo-contenido" rows="3" required placeholder="Describe tu duda, experiencia o propuesta para la comunidad..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-relleno">Publicar hilo</button>
-                </form>
-            </article>
-
-            <!-- Contenedor dinámico conectado a MongoDB Atlas -->
-            <div class="lista-hilos" id="lista-hilos">
-                <p>Cargando hilos de la comunidad...</p>
+            <div class="tabla-admin-contenedor">
+                <table class="tabla-admin">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                            <th>Correo</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuarios-admin"></tbody>
+                </table>
             </div>
-        </section>
-    </main>
+
+            <h2>Gestión de contenidos</h2>
+            <div class="acciones-huerta">
+                <a class="btn btn-relleno" href="huertas.html">Gestionar huertas</a>
+                <a class="btn btn-relleno" href="biblioteca.html">Gestionar guías</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+
 
     <nav class="tabbar" aria-label="Navegación principal">
         <a class="tab" href="index.html">
@@ -88,7 +81,7 @@
         <a class="tab" href="huertas.html">
             <span class="tab-icono" aria-hidden="true">🌱</span><span>Huertas</span>
         </a>
-        <a class="tab tab-activa" href="foro.html" aria-current="page">
+        <a class="tab" href="foro.html">
             <span class="tab-icono" aria-hidden="true">💬</span><span>Foro</span>
         </a>
         <a class="tab" href="nosotros.html">
@@ -97,7 +90,19 @@
         <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
-    </nav>
+    
+        <a class="tab" href="biblioteca.html">
+            <span class="tab-icono" aria-hidden="true">📚</span>
+            <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
+        </a>
+        
+</nav>
 
     <div class="modal-fondo oculto" id="modal-login">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
@@ -156,9 +161,12 @@
         <p>EcoHuertos y Asociados</p>
     </footer>
 
-    <script src="api.js"></script>
-    <script src="script.js"></script>
-    <script src="auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

@@ -59,6 +59,7 @@ app.use('/api/huertas', require('./routes/huertas.routes'));
 app.use('/api/guias', require('./routes/guias.routes'));
 app.use('/api/admin', require('./routes/admin.routes'));
 app.use('/api/threads', require('./routes/threads.routes'));
+app.use('/api/actividades', require('./routes/actividades.routes'));
 
 app.use((req, res, next) =>
   next(

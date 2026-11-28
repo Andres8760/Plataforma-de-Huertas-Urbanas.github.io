@@ -84,3 +84,206 @@ Respuesta `201`:
 ```json
 { "ok": false, "mensaje": "Solo puedes modificar tus propias huertas" }
 ```
+
+## Foro comunitario
+
+| Método | Ruta | Autenticación | Roles | HTTP |
+|---|---|---|---|---|
+| GET | /api/threads | No | Todos | 200 |
+| POST | /api/threads | Sí | usuario, admin | 201 |
+| POST | /api/threads/:id/replies | Sí | usuario, admin | 200 |
+| DELETE | /api/threads/:id | Sí | admin | 200 |
+
+Los autores se obtienen del usuario autenticado mediante JWT.
+
+### Crear una publicación
+
+POST /api/threads
+
+Ejemplo de petición:
+
+    {
+      "titulo": "Cultivo de tomate",
+      "categoria": "General",
+      "contenido": "Compartamos consejos para cultivar tomates."
+    }
+
+La categoría debe corresponder a una opción permitida por el formulario y el modelo Thread.
+
+Respuesta ilustrativa:
+
+    {
+      "ok": true,
+      "data": {
+        "titulo": "Cultivo de tomate",
+        "autor": "vecina"
+      }
+    }
+
+### Responder una publicación
+
+POST /api/threads/:id/replies
+
+Ejemplo de petición:
+
+    {
+      "mensaje": "Recomiendo preparar el suelo con compost."
+    }
+
+### Eliminar una publicación
+
+DELETE /api/threads/:id
+
+Requiere autenticación y rol administrador.
+
+La eliminación incluye las respuestas almacenadas en la publicación.
+
+## Calendario y actividades
+
+| Método | Ruta | Autenticación | Roles | HTTP |
+|---|---|---|---|---|
+| GET | /api/actividades | No | Todos | 200 |
+| POST | /api/actividades | Sí | Propietario o admin | 201 |
+| PATCH | /api/actividades/:id | Sí | Propietario o admin | 200 |
+| DELETE | /api/actividades/:id | Sí | Propietario o admin | 200 |
+
+Tipos de actividades:
+
+- siembra
+- cosecha
+- riego
+- mantenimiento
+- taller
+
+Estados permitidos: pendiente y completada.
+
+### Registrar una actividad
+
+POST /api/actividades
+
+Ejemplo de petición:
+
+    {
+      "titulo": "Sembrar tomates",
+      "descripcion": "Preparar semillas y suelo.",
+      "tipo": "siembra",
+      "fecha": "2026-12-01",
+      "huerta": "ID_DE_LA_HUERTA"
+    }
+
+Respuesta HTTP 201, simplificada:
+
+    {
+      "ok": true,
+      "mensaje": "Actividad registrada",
+      "data": {
+        "titulo": "Sembrar tomates",
+        "estado": "pendiente"
+      }
+    }
+
+### Modificar una actividad
+
+PATCH /api/actividades/:id
+
+Ejemplo de petición:
+
+    {
+      "titulo": "Sembrar tomates y lechugas",
+      "fecha": "2026-12-05"
+    }
+
+### Completar una actividad
+
+PATCH /api/actividades/:id
+
+Ejemplo de petición:
+
+    {
+      "estado": "completada"
+    }
+
+Respuesta HTTP 200, simplificada:
+
+    {
+      "ok": true,
+      "mensaje": "Actividad actualizada"
+    }
+
+### Eliminar una actividad
+
+DELETE /api/actividades/:id
+
+Respuesta HTTP 200:
+
+    {
+      "ok": true,
+      "mensaje": "Actividad eliminada"
+    }
+
+Al eliminar una huerta también se eliminan sus actividades asociadas.
+
+Los identificadores utilizados deben corresponder a documentos existentes en MongoDB.
+
+## Ejemplos de administración
+
+### Consultar estadísticas
+
+GET /api/admin/stats
+
+Respuesta ilustrativa:
+
+    {
+      "ok": true,
+      "data": {
+        "usuarios": 4,
+        "admins": 1,
+        "huertas": 2,
+        "guias": 1
+      }
+    }
+
+### Cambiar el rol de un usuario
+
+PATCH /api/admin/users/:id/role
+
+Petición:
+
+    {
+      "role": "usuario"
+    }
+
+Los roles permitidos son usuario y admin.
+
+## Seguridad de las peticiones
+
+Las rutas protegidas requieren el encabezado:
+
+    Authorization: Bearer TOKEN_JWT
+
+Las peticiones con cuerpo JSON requieren:
+
+    Content-Type: application/json
+
+## Códigos de respuesta
+
+| Código | Significado |
+|---|---|
+| 200 | Operación exitosa |
+| 201 | Recurso creado |
+| 400 | Datos inválidos |
+| 401 | Autenticación requerida |
+| 403 | Permisos insuficientes |
+| 404 | Recurso no encontrado |
+| 409 | Conflicto de datos |
+| 429 | Límite de peticiones superado |
+| 500 | Error interno |
+
+## Consideraciones
+
+- Las contraseñas se almacenan mediante hash bcrypt.
+- Los permisos se verifican en el backend.
+- El cierre de sesión elimina el JWT del cliente.
+- Los JWT emitidos conservan su validez hasta su expiración.
+- Las credenciales se gestionan mediante variables de entorno.
+- Las respuestas ilustrativas pueden omitir campos automáticos de MongoDB.

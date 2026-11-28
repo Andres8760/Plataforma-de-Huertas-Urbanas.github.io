@@ -861,3 +861,30 @@ p a,
 #invitacion-foro[hidden] {
     display: none;
 }
+
+/* Calendario y registro de actividades */
+#lista-actividades {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+#nueva-actividad {
+    margin: 16px 0;
+}
+
+#filtro-actividad {
+    padding: 10px;
+    font: inherit;
+    border: 1px solid #aac9a8;
+    border-radius: 8px;
+}
+
+#mensaje-actividades {
+    margin: 12px 0;
+}
+
+#lista-actividades .evento-info {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}

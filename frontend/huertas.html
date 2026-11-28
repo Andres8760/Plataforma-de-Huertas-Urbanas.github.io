@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi proyecto · EcoHuertos</title>
+    <title>Huertas · EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="proyecto">
+<body data-pagina="huertas">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -34,45 +34,53 @@
 
     <main id="contenido-principal" tabindex="-1">
         <section class="vista vista-activa">
-            <h1 class="t-pagina">Mi proyecto</h1>
-            <p class="subtitulo">Tu espacio personal dentro de EcoHuertos.</p>
+            <h1 class="t-pagina">Huertas públicas</h1>
+            <p class="subtitulo">Explora las huertas registradas por la comunidad o añade la tuya.</p>
 
-            <nav class="subtabs" aria-label="Secciones de Mi proyecto">
-                <a class="subtab subtab-activa" href="#info" data-panel="panel-info" aria-current="true">Información</a>
-                <a class="subtab" href="#mi-huerta" data-panel="panel-mi-huerta">Mi huerta</a>
-                <a class="subtab" href="#mi-foro" data-panel="panel-mi-foro">Mi foro</a>
-                <a class="subtab" href="#mi-calendario" data-panel="panel-mi-calendario">Mi calendario</a>
-            
-        <a class="tab" href="biblioteca.html">
-            <span class="tab-icono" aria-hidden="true">📚</span>
-            <span>Biblioteca</span>
-        </a>
-        
-</nav>
+            <form id="form-huerta">
+                <div class="campo">
+                    <label for="nombre">Nombre de la huerta <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="nombre" required minlength="2" maxlength="100">
+                </div>
+                <div class="campo">
+                    <label for="ubicacion">Ciudad <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="ubicacion" required maxlength="80">
+                </div>
+                <div class="campo">
+                    <label for="cultivo">Cultivos separados por comas <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="cultivo" required>
+                </div>
+                
+<div class="campo">
+    <label for="barrio">Barrio</label>
+    <input id="barrio" maxlength="80">
+</div>
+<div class="campo">
+    <label for="direccion">Dirección</label>
+    <input id="direccion" maxlength="150">
+</div>
+<div class="campo">
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" maxlength="1000"></textarea>
+</div>
+<div class="campo">
+    <label for="tipo">Tipo de huerta</label>
+    <select id="tipo">
+        <option value="comunitaria">Comunitaria</option>
+        <option value="escolar">Escolar</option>
+        <option value="familiar">Familiar</option>
+        <option value="institucional">Institucional</option>
+    </select>
+</div>
+<div class="campo">
+    <label for="areaM2">Área en metros cuadrados</label>
+    <input type="number" id="areaM2" min="1" step="any">
+</div>
+<button type="submit" class="btn btn-relleno">Registrar huerta</button>
+                <p class="form-ok oculto" id="estado-huerta" role="status"></p>
+            </form>
 
-            <div id="panel-info" class="panel panel-activo">
-                <h2 class="t-sub">Información de tu cuenta</h2>
-                <p>Nombre completo: <strong id="info-nombre-completo">—</strong></p>
-                <p>Usuario: <strong id="info-usuario">—</strong></p>
-                <p>Correo: <strong id="info-correo">—</strong></p>
-                <p>Desde aquí podrás administrar tus datos y preferencias de la comunidad.</p>
-            </div>
-
-            <div id="panel-mi-huerta" class="panel">
-                <h2 class="t-sub">Mi huerta</h2>
-                <p class="subtitulo">Huertas que has registrado con tu cuenta.</p>
-                <div id="contenedor-mis-huertas" class="lista-huertas"></div>
-            </div>
-
-            <div id="panel-mi-foro" class="panel">
-                <h2 class="t-sub">Mi foro</h2>
-                <p>Aún no has publicado ni respondido ningún hilo. Cuando lo hagas, aparecerá aquí.</p>
-            </div>
-
-            <div id="panel-mi-calendario" class="panel">
-                <h2 class="t-sub">Mi calendario</h2>
-                <p>Aún no te has apuntado a ninguna actividad. Explora el <a href="calendario.html">calendario público</a> para unirte a una.</p>
-            </div>
+            <div id="contenedor-huertas" class="lista-huertas"></div>
         </section>
     </main>
 
@@ -83,7 +91,7 @@
         <a class="tab" href="calendario.html">
             <span class="tab-icono" aria-hidden="true">📅</span><span>Calendario</span>
         </a>
-        <a class="tab" href="huertas.html">
+        <a class="tab tab-activa" href="huertas.html" aria-current="page">
             <span class="tab-icono" aria-hidden="true">🌱</span><span>Huertas</span>
         </a>
         <a class="tab" href="foro.html">
@@ -92,10 +100,22 @@
         <a class="tab" href="nosotros.html">
             <span class="tab-icono" aria-hidden="true">🌻</span><span>Nosotros</span>
         </a>
-        <a class="tab tab-activa oculto" href="mi-proyecto.html" id="tab-proyecto" aria-current="page">
+        <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
-    </nav>
+    
+        <a class="tab" href="biblioteca.html">
+            <span class="tab-icono" aria-hidden="true">📚</span>
+            <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
+        </a>
+        
+</nav>
 
     <div class="modal-fondo oculto" id="modal-login">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
@@ -154,10 +174,11 @@
         <p>EcoHuertos y Asociados</p>
     </footer>
 
-    <script src="api.js"></script>
-    <script src="script.js"></script>
-    <script src="huertas.js"></script>
-    <script src="auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

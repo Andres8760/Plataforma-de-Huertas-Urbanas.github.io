@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros · EcoHuertos</title>
+    <title>Biblioteca de guías - EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="nosotros">
+<body data-pagina="biblioteca">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -32,59 +32,24 @@
         </div>
     </header>
 
-    <main id="contenido-principal" tabindex="-1">
-        <section class="vista vista-activa">
-            <h1 class="t-pagina">Nosotros</h1>
-            <p class="subtitulo">Una red vecinal dedicada a transformar espacios urbanos en ecosistemas productivos y sostenibles.</p>
+    
+<main id="contenido-principal" tabindex="-1">
+    <section class="vista vista-activa">
+        <h1 class="t-pagina">Biblioteca de guías</h1>
+        <p class="subtitulo">
+            Aprende sobre agricultura urbana y el cuidado de tu huerta.
+        </p>
 
-            <article class="tarjeta-caso" style="margin-bottom: 1.2rem;">
-                <h2 class="t-sub">🌱 Nuestra Misión</h2>
-                <p>Facilitar el acceso al conocimiento agroecológico y conectar a vecinos, huerteros principiantes y expertos para fomentar la soberanía alimentaria, el aprovechamiento de residuos orgánicos mediante compostaje y el fortalecimiento del tejido comunitario.</p>
-            </article>
+        <p id="mensaje-guias" role="status"></p>
 
-            <article class="tarjeta-caso" style="margin-bottom: 1.2rem;">
-                <h2 class="t-sub">🌍 Nuestra Visión</h2>
-                <p>Consolidarnos como el punto de encuentro digital referente para la agricultura urbana sostenible, logrando que cada hogar, terraza o espacio barrial cuente con herramientas prácticas para cultivar alimentos limpios.</p>
-            </article>
+        <button id="nueva-guia" class="btn btn-relleno oculto">
+            Crear nueva guía
+        </button>
 
-            <article class="tarjeta-caso">
-                <h2 class="t-sub">🤝 ¿Qué encuentras en EcoHuertos?</h2>
-                <p>Calendarios de siembra por temporada, un directorio abierto de huertas comunitarias activas y un foro colaborativo para resolver dudas reales sobre control biológico de plagas, riego y cuidado del suelo.</p>
-            </article>
+        <div id="lista-guias" class="lista-huertas"></div>
+    </section>
+</main>
 
-            <section class="franja franja-sin-borde">
-                <h2 class="t-sub">Nuestra motivación</h2>
-                <p>
-                    EcoHuerto nació como un proyecto desarrollado para la materia de
-                    Programación Orientada a la Web. Su propósito es aplicar de manera práctica los
-                    conceptos aprendidos en clase mediante la creación de una plataforma enfocada en la
-                    gestión de huertos ecológicos, combinando conocimientos de programación, organización
-                    de datos y diseño de soluciones tecnológicas.
-                </p>
-            </section>
-
-            <section class="franja">
-                <h2 class="t-sub">El equipo</h2>
-                <div class="tarjetas-publico">
-                    <article class="tarjeta tarjeta-autor">
-                        <span class="autor-avatar">AG</span>
-                        <h3>Andres Felipe Gelpud Calvache</h3>
-                        <p class="autor-rol">Programador</p>
-                    </article>
-                    <article class="tarjeta tarjeta-autor">
-                        <span class="autor-avatar">DG</span>
-                        <h3>Darlyn Dayana Grisales Orozco</h3>
-                        <p class="autor-rol">Programador</p>
-                    </article>
-                    <article class="tarjeta tarjeta-autor">
-                        <span class="autor-avatar">DC</span>
-                        <h3>David Alejandro Clavijo Guevara</h3>
-                        <p class="autor-rol">Programador</p>
-                    </article>
-                </div>
-            </section>
-        </section>
-    </main>
 
     <nav class="tabbar" aria-label="Navegación principal">
         <a class="tab" href="index.html">
@@ -99,16 +64,22 @@
         <a class="tab" href="foro.html">
             <span class="tab-icono" aria-hidden="true">💬</span><span>Foro</span>
         </a>
-        <a class="tab tab-activa" href="nosotros.html" aria-current="page">
+        <a class="tab" href="nosotros.html">
             <span class="tab-icono" aria-hidden="true">🌻</span><span>Nosotros</span>
         </a>
         <a class="tab oculto" href="mi-proyecto.html" id="tab-proyecto">
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
     
-        <a class="tab" href="biblioteca.html">
+        <a class="tab tab-activa" href="biblioteca.html" aria-current="page">
             <span class="tab-icono" aria-hidden="true">📚</span>
             <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
         </a>
         
 </nav>
@@ -170,10 +141,12 @@
         <p>EcoHuertos y Asociados</p>
     </footer>
 
-    <script src="api.js"></script>
-    <script src="script.js"></script>
-    <script src="huertas.js"></script>
-    <script src="auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/guias.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi proyecto · EcoHuertos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body data-pagina="proyecto">
+
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="topbar">
+        <a href="index.html" class="marca">
+            <span class="marca-icono" aria-hidden="true">🌿</span>
+            <span class="marca-texto">EcoHuertos</span>
+        </a>
+
+        <div class="auth-invitado" id="auth-invitado">
+            <button class="btn btn-fantasma" id="btn-abrir-login">Iniciar sesión</button>
+            <button class="btn btn-relleno" id="btn-abrir-registro">Registrarse</button>
+        </div>
+
+        <div class="auth-usuario oculto" id="auth-usuario">
+            <span class="saludo">Hola, <strong id="nombre-usuario">vecina</strong></span>
+            <button class="btn btn-fantasma" id="btn-salir">Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main id="contenido-principal" tabindex="-1">
+        <section class="vista vista-activa">
+            <h1 class="t-pagina">Mi proyecto</h1>
+            <p class="subtitulo">Tu espacio personal dentro de EcoHuertos.</p>
+
+            <nav class="subtabs" aria-label="Secciones de Mi proyecto">
+                <a class="subtab subtab-activa" href="#info" data-panel="panel-info" aria-current="true">Información</a>
+                <a class="subtab" href="#mi-huerta" data-panel="panel-mi-huerta">Mi huerta</a>
+                <a class="subtab" href="#mi-foro" data-panel="panel-mi-foro">Mi foro</a>
+                <a class="subtab" href="#mi-calendario" data-panel="panel-mi-calendario">Mi calendario</a>
+            
+        <a class="tab" href="biblioteca.html">
+            <span class="tab-icono" aria-hidden="true">📚</span>
+            <span>Biblioteca</span>
+        </a>
+        
+
+        <a id="enlace-admin" class="tab oculto" href="admin.html">
+            <span class="tab-icono" aria-hidden="true">⚙️</span>
+            <span>Administración</span>
+        </a>
+        
+</nav>
+
+            <div id="panel-info" class="panel panel-activo">
+                <h2 class="t-sub">Información de tu cuenta</h2>
+                <p>Nombre completo: <strong id="info-nombre-completo">—</strong></p>
+                <p>Usuario: <strong id="info-usuario">—</strong></p>
+                <p>Correo: <strong id="info-correo">—</strong></p>
+                <p>Desde aquí podrás administrar tus datos y preferencias de la comunidad.</p>
+            </div>
+
+            <div id="panel-mi-huerta" class="panel">
+                <h2 class="t-sub">Mi huerta</h2>
+                <p class="subtitulo">Huertas que has registrado con tu cuenta.</p>
+                <div id="contenedor-mis-huertas" class="lista-huertas"></div>
+            </div>
+
+            <div id="panel-mi-foro" class="panel">
+                <h2 class="t-sub">Mi foro</h2>
+                <p>Aún no has publicado ni respondido ningún hilo. Cuando lo hagas, aparecerá aquí.</p>
+            </div>
+
+            <div id="panel-mi-calendario" class="panel">
+                <h2 class="t-sub">Mi calendario</h2>
+                <p>Aún no te has apuntado a ninguna actividad. Explora el <a href="calendario.html">calendario público</a> para unirte a una.</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Navegación principal">
+        <a class="tab" href="index.html">
+            <span class="tab-icono" aria-hidden="true">🏠</span><span>Inicio</span>
+        </a>
+        <a class="tab" href="calendario.html">
+            <span class="tab-icono" aria-hidden="true">📅</span><span>Calendario</span>
+        </a>
+        <a class="tab" href="huertas.html">
+            <span class="tab-icono" aria-hidden="true">🌱</span><span>Huertas</span>
+        </a>
+        <a class="tab" href="foro.html">
+            <span class="tab-icono" aria-hidden="true">💬</span><span>Foro</span>
+        </a>
+        <a class="tab" href="nosotros.html">
+            <span class="tab-icono" aria-hidden="true">🌻</span><span>Nosotros</span>
+        </a>
+        <a class="tab tab-activa oculto" href="mi-proyecto.html" id="tab-proyecto" aria-current="page">
+            <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
+        </a>
+    </nav>
+
+    <div class="modal-fondo oculto" id="modal-login">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
+            <button class="modal-cerrar" data-cerrar="modal-login" aria-label="Cerrar ventana de inicio de sesión">✕</button>
+            <h2 id="titulo-login">Iniciar sesión</h2>
+            <form id="form-login">
+                <div class="campo">
+                    <label for="login-identificador">Usuario o correo <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="login-identificador" required autocomplete="username">
+                </div>
+                <div class="campo">
+                    <label for="login-clave">Contraseña <span class="req">(obligatorio)</span></label>
+                    <input type="password" id="login-clave" required autocomplete="current-password">
+                </div>
+                <p class="form-error oculto" id="error-login" role="alert"></p>
+                <button type="submit" class="btn btn-relleno">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-fondo oculto" id="modal-registro">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-registro">
+            <button class="modal-cerrar" data-cerrar="modal-registro" aria-label="Cerrar ventana de registro">✕</button>
+            <h2 id="titulo-registro">Crear cuenta</h2>
+            <form id="form-registro">
+                <div class="campo">
+                    <label for="registro-nombres">Nombres <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="registro-nombres" required autocomplete="given-name">
+                </div>
+                <div class="campo">
+                    <label for="registro-apellidos">Apellidos <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="registro-apellidos" required autocomplete="family-name">
+                </div>
+                <div class="campo">
+                    <label for="registro-usuario">Nombre de usuario <span class="req">(obligatorio)</span></label>
+                    <input type="text" id="registro-usuario" required autocomplete="username">
+                </div>
+                <div class="campo">
+                    <label for="registro-correo">Correo <span class="req">(obligatorio)</span></label>
+                    <input type="email" id="registro-correo" required autocomplete="email">
+                </div>
+                <div class="campo">
+                    <label for="registro-clave">Contraseña <span class="req">(obligatorio)</span></label>
+                    <input type="password" id="registro-clave" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,72}" autocomplete="new-password" aria-describedby="ayuda-clave">
+                    <span class="ayuda" id="ayuda-clave">Entre 8 y 72 caracteres, con letras y números.</span>
+                </div>
+                <p class="form-error oculto" id="error-registro" role="alert"></p>
+                <button type="submit" class="btn btn-relleno">Crear cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="solo-lectores" id="aviso-estado" role="status" aria-live="polite"></div>
+
+    <footer class="site-footer">
+        <p>EcoHuertos y Asociados</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

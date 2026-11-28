@@ -11,6 +11,7 @@ function iniciarSesion(usuario, token) {
     };
 
     actualizarUISesion();
+    if (typeof cargarActividades === "function") cargarActividades();
     actualizarPermisosAdmin();
     if (typeof cargarGuias === "function") cargarGuias();
     sincronizarAutorForo();
@@ -40,6 +41,7 @@ async function cerrarSesion() {
         eliminarToken();
         sesion = null;
         actualizarUISesion();
+    if (typeof cargarActividades === "function") cargarActividades();
     actualizarPermisosAdmin();
     if (typeof cargarGuias === "function") cargarGuias();
         sincronizarAutorForo();
@@ -111,6 +113,7 @@ async function iniciarPagina() {
     await recuperarSesion();
 
     actualizarUISesion();
+    if (typeof cargarActividades === "function") cargarActividades();
     actualizarPermisosAdmin();
     if (typeof cargarGuias === "function") cargarGuias();
     sincronizarAutorForo();

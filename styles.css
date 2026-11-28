@@ -817,3 +817,47 @@ p a,
 #contenido-admin[hidden] {
     display: none;
 }
+
+/* Foro comunitario */
+.hilo {
+    margin-bottom: 20px;
+}
+
+.hilo details {
+    margin: 15px 0;
+}
+
+.hilo summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.respuesta-foro {
+    padding: 12px;
+    margin: 10px 0;
+    border-left: 3px solid #397c39;
+    overflow-wrap: anywhere;
+}
+
+.form-respuesta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.form-respuesta textarea {
+    width: 100%;
+    min-height: 70px;
+    padding: 10px;
+    font: inherit;
+}
+
+#mensaje-foro {
+    margin: 12px 0;
+}
+
+#form-nuevo-hilo[hidden],
+#invitacion-foro[hidden] {
+    display: none;
+}

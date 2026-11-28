@@ -40,15 +40,21 @@
             <!-- Formulario para crear nuevo hilo -->
             <article class="tarjeta-caso" style="margin-bottom: 2rem;">
                 <h2 class="t-sub">Iniciar un nuevo tema de conversación</h2>
-                <form id="form-nuevo-hilo">
+                
+<p id="mensaje-foro" role="status"></p>
+<p id="invitacion-foro">
+    Inicia sesión para crear publicaciones y responder en el foro.
+</p>
+<form id="form-nuevo-hilo" hidden>
+
                     <div class="campo">
                         <label for="hilo-titulo">Título del tema <span class="req">(obligatorio)</span></label>
-                        <input type="text" id="hilo-titulo" required placeholder="Ej. ¿Cómo preparar compostaje casero sin malos olores?">
+                        <input type="text" id="hilo-titulo" required minlength="3" maxlength="150" placeholder="Ej. ¿Cómo preparar compostaje casero sin malos olores?">
                     </div>
 
                     <div class="campo" id="campo-autor-invitado">
                         <label for="hilo-autor">Tu nombre o alias <span class="req">(obligatorio)</span></label>
-                        <input type="text" id="hilo-autor" required placeholder="Ej. Camila Huertera">
+                        <input type="text" id="hilo-autor" required readonly placeholder="Ej. Camila Huertera">
                     </div>
 
                     <div class="campo">
@@ -64,7 +70,7 @@
 
                     <div class="campo">
                         <label for="hilo-contenido">Mensaje o consulta <span class="req">(obligatorio)</span></label>
-                        <textarea id="hilo-contenido" rows="3" required placeholder="Describe tu duda, experiencia o propuesta para la comunidad..."></textarea>
+                        <textarea id="hilo-contenido" rows="3" required minlength="5" maxlength="2000" placeholder="Describe tu duda, experiencia o propuesta para la comunidad..."></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-relleno">Publicar hilo</button>
@@ -171,6 +177,7 @@
     <script src="api.js"></script>
     <script src="script.js"></script>
     <script src="huertas.js"></script>
+    <script src="foro.js"></script>
     <script src="auth.js"></script>
 
 </body>

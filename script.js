@@ -10,23 +10,11 @@ function leerLS(clave, porDefecto) {
 }
 
 let huertas = leerLS("ecohuertos_huertas", []);
-let usuarios = leerLS("ecohuertos_usuarios", []);
-let sesion = leerLS("ecohuertos_sesion", null); // null = invitado
+
+let sesion = null;
 
 function guardarHuertas() {
     localStorage.setItem("ecohuertos_huertas", JSON.stringify(huertas));
-}
-
-function guardarUsuarios() {
-    localStorage.setItem("ecohuertos_usuarios", JSON.stringify(usuarios));
-}
-
-function guardarSesion() {
-    if (sesion) {
-        localStorage.setItem("ecohuertos_sesion", JSON.stringify(sesion));
-    } else {
-        localStorage.removeItem("ecohuertos_sesion");
-    }
 }
 
 function escaparHTML(texto) {
@@ -293,110 +281,6 @@ function actualizarUISesion() {
     }
 
     renderizarMisHuertas();
-}
-
-function iniciarSesion(usuario) {
-    // La contraseña no se guarda en la sesión, solo en la lista de usuarios
-    sesion = {
-        nombres: usuario.nombres,
-        apellidos: usuario.apellidos,
-        usuario: usuario.usuario,
-        correo: usuario.correo
-    };
-    guardarSesion();
-    actualizarUISesion();
-    anunciar(`Sesión iniciada como ${sesion.usuario}.`);
-}
-
-function cerrarSesion() {
-    sesion = null;
-    guardarSesion();
-    // "Mi proyecto" es privado: si estás ahí, vuelves al inicio
-    if (pagina === "proyecto") {
-        window.location.href = "index.html";
-        return;
-    }
-    actualizarUISesion();
-    anunciar("Sesión cerrada.");
-    document.getElementById("btn-abrir-login").focus();
-}
-
-document.getElementById("form-login").addEventListener("submit", (evento) => {
-    evento.preventDefault();
-    ocultarErrorFormulario("error-login");
-
-    const identificador = document.getElementById("login-identificador").value.trim().toLowerCase();
-    const clave = document.getElementById("login-clave").value;
-
-    const usuario = usuarios.find(u =>
-        u.usuario.toLowerCase() === identificador || u.correo.toLowerCase() === identificador
-    );
-
-    if (!usuario) {
-        mostrarErrorFormulario("error-login", "No encontramos una cuenta con ese usuario o correo. Revisa que esté bien escrito o crea una cuenta con el botón «Registrarse».", "login-identificador");
-        return;
-    }
-
-    if (usuario.clave !== clave) {
-        mostrarErrorFormulario("error-login", "La contraseña es incorrecta. Inténtalo de nuevo; recuerda que distingue mayúsculas y minúsculas.", "login-clave");
-        return;
-    }
-
-    iniciarSesion(usuario);
-    cerrarModal(modalLogin);
-    evento.target.reset();
-});
-
-document.getElementById("form-registro").addEventListener("submit", (evento) => {
-    evento.preventDefault();
-    ocultarErrorFormulario("error-registro");
-
-    const nombres = document.getElementById("registro-nombres").value.trim();
-    const apellidos = document.getElementById("registro-apellidos").value.trim();
-    const usuario = document.getElementById("registro-usuario").value.trim();
-    const correo = document.getElementById("registro-correo").value.trim();
-    const clave = document.getElementById("registro-clave").value;
-
-    if (usuarios.some(u => u.usuario.toLowerCase() === usuario.toLowerCase())) {
-        mostrarErrorFormulario("error-registro", `El nombre de usuario "${usuario}" ya está en uso. Prueba con otro, por ejemplo "${usuario}${Math.floor(Math.random() * 90 + 10)}".`, "registro-usuario");
-        return;
-    }
-
-    if (usuarios.some(u => u.correo.toLowerCase() === correo.toLowerCase())) {
-        mostrarErrorFormulario("error-registro", "Ya existe una cuenta con ese correo. Si es tuya, usa «Iniciar sesión».", "registro-correo");
-        return;
-    }
-
-    const nuevoUsuario = { nombres, apellidos, usuario, correo, clave };
-    usuarios.push(nuevoUsuario);
-    guardarUsuarios();
-
-    iniciarSesion(nuevoUsuario);
-    cerrarModal(modalRegistro);
-    evento.target.reset();
-});
-
-document.getElementById("btn-salir").addEventListener("click", cerrarSesion);
-
-/* ===================== INICIO DE PÁGINA ===================== */
-
-actualizarUISesion();
-renderizarHuertas();
-
-// "Mi proyecto" solo para usuarios con sesión: si no hay, vuelve al inicio con el login abierto
-if (pagina === "proyecto") {
-    if (!sesion) {
-        window.location.replace("index.html?login=1");
-    } else {
-        panelDesdeHash();
-        window.addEventListener("hashchange", panelDesdeHash);
-    }
-}
-
-// Permite abrir el login desde otra página (?login=1)
-if (new URLSearchParams(location.search).get("login") === "1" && !sesion) {
-    abrirModal(modalLogin);
-    history.replaceState(null, "", location.pathname);
 }
 
 /* ===================== FORO (MongoDB Atlas API) ===================== */

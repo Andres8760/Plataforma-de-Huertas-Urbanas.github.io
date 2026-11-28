@@ -159,8 +159,8 @@
                 </div>
                 <div class="campo">
                     <label for="registro-clave">Contraseña <span class="req">(obligatorio)</span></label>
-                    <input type="password" id="registro-clave" required minlength="4" autocomplete="new-password" aria-describedby="ayuda-clave">
-                    <span class="ayuda" id="ayuda-clave">Mínimo 4 caracteres.</span>
+                    <input type="password" id="registro-clave" required minlength="8" maxlength="72" pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,72}" autocomplete="new-password" aria-describedby="ayuda-clave">
+                    <span class="ayuda" id="ayuda-clave">Entre 8 y 72 caracteres, con letras y números.</span>
                 </div>
                 <p class="form-error oculto" id="error-registro" role="alert"></p>
                 <button type="submit" class="btn btn-relleno">Crear cuenta</button>
@@ -183,7 +183,9 @@
     </details>
 </footer>
 
+    <script src="api.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
 
 </body>
 

@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Huerta = require('../models/Huerta');
+const Actividad = require('../models/Actividad');
 const Guia = require('../models/Guia');
 const AppError = require('../utils/AppError');
 const asyncHandler = require('../utils/asyncHandler');
@@ -41,6 +42,8 @@ exports.deleteUser = asyncHandler(async (req, res) => {
   if (req.params.id === req.user.id) throw new AppError('No puedes eliminar tu propia cuenta', 400);
   const user = await User.findById(req.params.id);
   if (!user) throw new AppError('Usuario no encontrado', 404);
+  const huertas = await Huerta.find({ propietario: user._id }).select("_id");
+  await Actividad.deleteMany({ $or: [{ huerta: { $in: huertas.map(h => h._id) } }, { autor: user._id }] });
   await Huerta.deleteMany({ propietario: user._id });
   await user.deleteOne();
   res.json({ ok: true, mensaje: 'Usuario eliminado' });

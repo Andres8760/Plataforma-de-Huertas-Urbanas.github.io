@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administracion - EcoHuertos</title>
+    <title>Biblioteca de guías - EcoHuertos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body data-pagina="admin">
+<body data-pagina="biblioteca">
 
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
@@ -33,42 +33,22 @@
     </header>
 
     
-
 <main id="contenido-principal" tabindex="-1">
     <section class="vista vista-activa">
-        <h1 class="t-pagina">Panel administrativo</h1>
-        <p id="mensaje-admin" role="status"></p>
+        <h1 class="t-pagina">Biblioteca de guías</h1>
+        <p class="subtitulo">
+            Aprende sobre agricultura urbana y el cuidado de tu huerta.
+        </p>
 
-        <div id="contenido-admin" hidden>
-            <h2>Estadísticas de la plataforma</h2>
-            <div id="estadisticas-admin" class="estadisticas-admin"></div>
+        <p id="mensaje-guias" role="status"></p>
 
-            <h2>Gestión de usuarios</h2>
+        <button id="nueva-guia" class="btn btn-relleno oculto">
+            Crear nueva guía
+        </button>
 
-            <div class="tabla-admin-contenedor">
-                <table class="tabla-admin">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Usuario</th>
-                            <th>Correo</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usuarios-admin"></tbody>
-                </table>
-            </div>
-
-            <h2>Gestión de contenidos</h2>
-            <div class="acciones-huerta">
-                <a class="btn btn-relleno" href="huertas.html">Gestionar huertas</a>
-                <a class="btn btn-relleno" href="biblioteca.html">Gestionar guías</a>
-            </div>
-        </div>
+        <div id="lista-guias" class="lista-huertas"></div>
     </section>
 </main>
-
 
 
     <nav class="tabbar" aria-label="Navegación principal">
@@ -91,7 +71,7 @@
             <span class="tab-icono" aria-hidden="true">📁</span><span>Mi Proyecto</span>
         </a>
     
-        <a class="tab" href="biblioteca.html">
+        <a class="tab tab-activa" href="biblioteca.html" aria-current="page">
             <span class="tab-icono" aria-hidden="true">📚</span>
             <span>Biblioteca</span>
         </a>
@@ -161,12 +141,12 @@
         <p>EcoHuertos y Asociados</p>
     </footer>
 
-    <script src="api.js"></script>
-    <script src="script.js"></script>
-    <script src="huertas.js"></script>
-    <script src="admin.js"></script>
-    <script src="foro.js"></script>
-    <script src="auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/huertas.js"></script>
+    <script src="js/guias.js"></script>
+    <script src="js/foro.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 
